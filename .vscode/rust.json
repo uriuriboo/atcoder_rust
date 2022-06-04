@@ -1,0 +1,91 @@
+{
+    "template": {
+        "prefix": "tmplt",
+        "body": [
+            "#[allow(unused_imports)]",
+            "use proconio::{marker::*, *};",
+            "#[allow(unused_imports)]",
+            "use std::{cmp::*, collections::*, *};\n",
+            "#[fastout]",
+            "fn main(){",
+            "\tlet mut ans:usize = 0;",
+            "\tinput!{",
+            "\t\tn:usize,",
+            "\t\ta:[usize;n]",
+            "\t}\n",
+            "\tprintln!(\"{}\",ans);",
+            "}"
+        ],
+        "description": "テンプレート"
+    },
+    "printans": {
+        "prefix": "oans",
+        "body": [
+            "println!(\"{}\",ans)"
+        ],
+        "description": "ans出力"
+    },
+    "printYes": {
+        "prefix": "oY",
+        "body": [
+            "println!(\"Yes\")"
+        ],
+        "description": "Yes出力"
+    },
+    "printNo": {
+        "prefix": "oN",
+        "body": [
+            "println!(\"No\")"
+        ],
+        "description": "No出力"
+    },
+    "bitsearch": {
+        "prefix": "pbit",
+        "body": [
+            "for bit in 0..1 << $1{\n",
+            "\tfor i in 0..$1 {",
+            "\t\tif bit & (1 << i) != 0 {\n",
+            "\t\t}",
+            "\t}",
+            "}"
+        ],
+        "description": "bit探索"
+    },
+    "binary_search": {
+        "prefix": "bins",
+        "body": [
+            "let mut left:i64 = -1;",
+            "let mut right:i64 = $1+1;\n",
+            "while right-left > 1 {",
+            "\tlet mid:i64 = left + (right-left)/2;",
+            "\tif binary_search() {",
+            "\t\tleft = mid;",
+            "\t}",
+            "\telse {",
+            "\t\tright = mid;",
+            "\t}",
+            "}"
+        ],
+        "description": "めぐり式二分探索"
+    },
+    "loop": {
+        "prefix": "rep",
+        "body": [
+            "for i in 0..$1 {",
+            "\t",
+            "}"
+        ],
+        "description": "ループ"
+    },
+    "loop2": {
+        "prefix": "rrep",
+        "body": [
+            "for i in 0..$1 {",
+            "\tfor j in 0..$2 {",
+            "\t\t\t\t",
+            "\t}",
+            "}"
+        ],
+        "description": "二重ループ"
+    }
+}

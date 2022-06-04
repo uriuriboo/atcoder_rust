@@ -1,0 +1,2 @@
+cargo install cargo-compete
+cargo compete init i atcoder
