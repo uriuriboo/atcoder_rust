@@ -5,6 +5,8 @@
             "#[allow(unused_imports)]",
             "use proconio::{marker::*, *};",
             "#[allow(unused_imports)]",
+            "use num_integer::*;",
+            "#[allow(unused_imports)]",
             "use std::{cmp::*, collections::*, *};\n",
             "#[fastout]",
             "fn main(){",
@@ -82,7 +84,7 @@
         "body": [
             "for i in 0..$1 {",
             "\tfor j in 0..$2 {",
-            "\t\t\t\t",
+            "\t\t",
             "\t}",
             "}"
         ],
