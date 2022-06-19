@@ -1,1 +1,4 @@
+cargo install cargo-compete
+cargo compete init i atcoder
+
 cargo build & cargo compete t 
