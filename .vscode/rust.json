@@ -2,12 +2,13 @@
     "template": {
         "prefix": "tmplt",
         "body": [
-            "#[allow(unused_imports)]",
+            "#![allow(unused_imports, dead_code)]",
             "use proconio::{marker::*, *};",
-            "#[allow(unused_imports)]",
             "use num_integer::*;",
-            "#[allow(unused_imports)]",
+            "use num_traits::*;",
             "use std::{cmp::*, collections::*, *};\n",
+            "#[allow(dead_code)]",
+            "const MOD: usize = 1_000_000_007;\n",
             "#[fastout]",
             "fn main(){",
             "\tlet mut ans:usize = 0;",
