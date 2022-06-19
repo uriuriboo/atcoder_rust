@@ -13,12 +13,21 @@
 		},
 		{
 			"type": "shell",
-			"command":[ "cd ${workspaceFolder}/atcr/abc252",
-				"cargo build"
+			"command":[ "cd ${workspaceFolder}/abc253/src/bin/ & pwd",
+				//"cargo build & cargo compete t ${fileBasenameNoExtension}",
+				
 			],
 			
-			"group": "cd build",
+			"group": "build",
 			"label": "rust: cd cargo build"
+		},
+		{
+			"type": "shell",
+			"command": [
+				"pwd"
+			],
+			"group": "test",
+			"label": "pwd"
 		}
 	]
 }
