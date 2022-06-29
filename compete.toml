@@ -29,13 +29,7 @@ use std::{cmp::*, collections::*, *};
 
 #[fastout]
 fn main(){
-    let mut ans:usize = 0;
-    input!{
-        n:usize,
-        a:[usize;n]
-    }
-
-    println!("{}",ans);
+    todo!();
 }
 '''
 
