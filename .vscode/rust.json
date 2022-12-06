@@ -25,21 +25,21 @@
     "printans": {
         "prefix": "oans",
         "body": [
-            "println!(\"{}\",ans)"
+            "println!(\"{}\",ans);"
         ],
         "description": "ans出力"
     },
     "printYes": {
         "prefix": "oY",
         "body": [
-            "println!(\"Yes\")"
+            "println!(\"Yes\");"
         ],
         "description": "Yes出力"
     },
     "printNo": {
         "prefix": "oN",
         "body": [
-            "println!(\"No\")"
+            "println!(\"No\");"
         ],
         "description": "No出力"
     },
