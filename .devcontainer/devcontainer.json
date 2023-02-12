@@ -18,7 +18,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"bungcip.better-toml"
+				"rust-lang.rust"
 			]
 		}
 	}
