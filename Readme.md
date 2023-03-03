@@ -1,6 +1,6 @@
 # RustのAtCoder用Docker環境です
 
-cargo-competeを使用しています
+[cargo-compete](https://github.com/qryxip/cargo-compete)を使用しています
 詳しい利用方法は[こちら](https://qiita.com/rokoooouribo/items/76a0057c75694fd943f5)
 
 
