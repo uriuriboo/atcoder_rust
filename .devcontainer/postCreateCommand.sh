@@ -7,6 +7,7 @@ chmod a+x bt.bash
 chmod a+x sub.bash
 cargo install cargo-compete
 cargo compete i atcoder
+cargo compete l atcoder
 # touch rust-toolchain
 # echo "1.42" > rust-toolchain
 # cargo -V
