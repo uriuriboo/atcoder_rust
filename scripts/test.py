@@ -13,7 +13,7 @@ def download_test(contest_name,contest_id,problem_id):
     url = "https://atcoder.jp/contests/{0}/tasks/{0}_{1}".format(contest_id,problem_id)
     # cp = subprocess.run("pwd") /workspaces/atcoder_rust
     # cp = subprocess.run(["./bt.bash",contest_name,contest_id,problem_id])
-    cp = subprocess.run(["./bt.bash",contest_name,contest_id,problem_id])
+    cp = subprocess.run(["scripts/bt.bash",contest_name,contest_id,problem_id])
 
 contest_name,contest_id,problem_id = get_contest_id(sys.argv[1])
 download_test(contest_name,contest_id,problem_id)

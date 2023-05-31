@@ -5,6 +5,7 @@ if [ -e rust-toolchain ];then
 fi
 chmod a+x bt.bash
 chmod a+x sub.bash
+chmod a+x scripts/bt.bash
 sudo apt-add-repository ppa:fish-shell/release-3
 sudo apt-get update
 sudo apt-get install fish

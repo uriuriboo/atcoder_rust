@@ -1,6 +1,6 @@
 #!/bin/bash
-contest="abc"
-num=$1
-aplha=$2
+contest=$1
+num=$2
+aplha=$3
 cd /workspaces/atcoder_rust/${contest}${num}/src/bin/
 cargo build & cargo compete t ${aplha}
