@@ -18,7 +18,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"rust-lang.rust"
+				"rust-lang.rust",
+				"forbeslindesay.forbeslindesay-taskrunner"
 			]
 		}
 	}
