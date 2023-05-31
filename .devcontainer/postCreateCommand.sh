@@ -5,6 +5,10 @@ if [ -e rust-toolchain ];then
 fi
 chmod a+x bt.bash
 chmod a+x sub.bash
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-get update
+sudo apt-get install fish
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 cargo install cargo-compete
 cargo compete i atcoder
 cargo compete l atcoder
