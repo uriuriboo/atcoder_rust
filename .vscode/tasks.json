@@ -30,11 +30,25 @@
 		// 	"label": "pwd"
 		// },
 		{
-			"label": "download & test",
+			"label": "build & test",
 			"type": "shell",
 			"command": "python3",
 			"args": [
 				"${workspaceFolder}/scripts/test.py",
+				"${file}"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "submit",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/sub.py",
 				"${file}"
 			],
 			"group": {
