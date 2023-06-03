@@ -14,6 +14,9 @@ def submit(contest_name,contest_id,problem_id):
     # cp = subprocess.run("pwd") /workspaces/atcoder_rust
     # cp = subprocess.run(["./bt.bash",contest_name,contest_id,problem_id])
     cp = subprocess.run(["scripts/sub.bash",contest_name,contest_id,problem_id])
+    if cp != 0:
+        print("error submit failed.check the file you have open.")
+        sys.exit(1)
 
 contest_name,contest_id,problem_id = get_contest_id(sys.argv[1])
 submit(contest_name,contest_id,problem_id)

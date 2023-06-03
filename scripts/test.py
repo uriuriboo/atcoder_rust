@@ -15,6 +15,9 @@ def download_test(contest_name,contest_id,problem_id):
     # cp = subprocess.run(["./bt.bash",contest_name,contest_id,problem_id])
     cp = subprocess.run(["scripts/change_launch.bash",contest_name,contest_id,problem_id])
     cp = subprocess.run(["scripts/bt.bash",contest_name,contest_id,problem_id])
+    if cp != 0:
+        print("error test failed.check the file you have open.")
+        sys.exit(1)
 
 contest_name,contest_id,problem_id = get_contest_id(sys.argv[1])
 download_test(contest_name,contest_id,problem_id)
