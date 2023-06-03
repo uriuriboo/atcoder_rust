@@ -11,10 +11,10 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "chmod a+x ./.devcontainer/postCreateCommand.sh",
+	"postCreateCommand": "chmod a+x ./.devcontainer/postCreateCommand.bash",
 	// Configure tool-specific properties.
 	// "customizations": {},
-	"postStartCommand": "./.devcontainer/postCreateCommand.sh",
+	"postStartCommand": "./.devcontainer/postCreateCommand.bash",
 	"customizations": {
 		"vscode": {
 			"extensions": [
