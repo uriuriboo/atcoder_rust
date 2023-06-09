@@ -3,7 +3,7 @@
 if [ -e rust-toolchain ];then
     rm rust-toolchain
 fi
-echo give permission to bashfiels
+echo give permission to bashfiles
 chmod a+x bt.bash
 chmod a+x sub.bash
 chmod a+x scripts/bt.bash
