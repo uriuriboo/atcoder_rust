@@ -17,6 +17,8 @@ cargo install cargo-compete
 cargo compete i atcoder
 echo login to atcoder
 cargo compete l atcoder
+echo clone ac-library-rs
+git clone https://github.com/rust-lang-ja/ac-library-rs.git
 # touch rust-toolchain
 # echo "1.42" > rust-toolchain
 # cargo -V
