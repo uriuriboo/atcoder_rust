@@ -19,7 +19,8 @@
 		"vscode": {
 			"extensions": [
 				"rust-lang.rust",
-				"forbeslindesay.forbeslindesay-taskrunner"
+				"forbeslindesay.forbeslindesay-taskrunner",
+				"GitHub.copilot"
 			]
 		}
 	}
