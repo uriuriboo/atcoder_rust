@@ -4,10 +4,7 @@ if [ -e rust-toolchain ];then
     rm rust-toolchain
 fi
 echo give permission to bashfiles
-chmod a+x bt.bash
-chmod a+x sub.bash
-chmod a+x scripts/bt.bash
-chmod a+x scripts/sub.bash
+chmod a+x bt.bash,sub.bash,scripts/bt.bash,scripts/sub.bash,scripts/change_launch.bash
 echo install fish and fisher
 sudo apt-add-repository ppa:fish-shell/release-3
 sudo apt-get update
