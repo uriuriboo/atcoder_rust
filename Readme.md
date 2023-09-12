@@ -3,6 +3,8 @@
 [cargo-compete](https://github.com/qryxip/cargo-compete)を使用しています
 詳しい利用方法は[こちら](https://qiita.com/rokoooouribo/items/76a0057c75694fd943f5)
 
+[Click here for the English Readme](https://github.com/uriuriboo/atcoder_rust/blob/main/Readme_en.md)
+
 ## 使い方
 
 ### ビルドとテスト
