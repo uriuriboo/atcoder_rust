@@ -11,11 +11,14 @@ sudo apt-get update
 sudo apt-get install fish
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 cargo install cargo-compete
+cargo install cargo-member
 cargo compete i atcoder
 echo login to atcoder
 cargo compete l atcoder
 echo clone ac-library-rs
 git clone https://github.com/rust-lang-ja/ac-library-rs.git
+cargo member include ac-library-rs
+cargo member include library
 # touch rust-toolchain
 # echo "1.42" > rust-toolchain
 # cargo -V

@@ -57,5 +57,47 @@
 			},
 			"problemMatcher": [],
 		},
+		{
+			"label": "rust: cargo compete new",
+			"type": "cargo",
+			"command": "compete",
+			"args": [
+				"new",
+				"${input:contest}"
+			]
+		},
+		{
+			"label": "rust: cargo member include",
+			"type": "cargo",
+			"command": "member",
+			"args": [
+				"include",
+				"${input:contest}"
+			]
+		},
+		{
+			"label": "new contest",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"rust: cargo compete new",
+				"rust: cargo member include",
+			],
+			"presentation": {
+				"echo": false,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true
+			},
+			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"id": "contest",
+			"description": "contestID",
+			"type": "promptString"
+		}
 	]
 }
