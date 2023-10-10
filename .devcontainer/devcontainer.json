@@ -11,7 +11,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "chmod a+x ./.devcontainer/postCreateCommand.bash",
+	"postCreateCommand": "chmod u+x ./.devcontainer/postCreateCommand.bash",
 	// Configure tool-specific properties.
 	// "customizations": {},
 	"postStartCommand": "./.devcontainer/postCreateCommand.bash",

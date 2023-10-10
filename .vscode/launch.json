@@ -10,10 +10,10 @@
             ],
             //"preLaunchTask": "cargo build",
             "internalConsoleOptions": "openOnSessionStart",
-            "program": "${workspaceRoot}/target/debug/abc252-${fileBasenameNoExtension}",
+            "program": "/workspaces/atcoder_rust/target/debug/abc321-c",
             "args": [],
             "stdio": [
-               "${workspaceFolder}/input.txt"
+                "/workspaces/atcoder_rust/input.txt"
             ],
         }
     ]
