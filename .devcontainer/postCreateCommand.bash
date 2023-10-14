@@ -1,8 +1,5 @@
 #!/bin/bash
 
-if [ -e rust-toolchain ];then
-    rm rust-toolchain
-fi
 echo give permission to bashfiles
 chmod u+x bt.bash,sub.bash,scripts/bt.bash,scripts/sub.bash,scripts/change_launch.bash
 
@@ -18,12 +15,9 @@ cargo install cargo-member
 cargo compete i atcoder
 echo clone ac-library-rs
 git clone https://github.com/rust-lang-ja/ac-library-rs.git
-cargo member include ac-library-rs
-# cargo member include library
 
 echo login to atcoder
 cargo compete l atcoder
-
 
 # rustup install 1.70
 # rustup install 1.70.0-x86_64-unknown-linux-gnu
@@ -34,4 +28,3 @@ cargo compete l atcoder
 # sudo apt-get update
 # sudo apt-get install fish
 # curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-
