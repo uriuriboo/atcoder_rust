@@ -42,5 +42,3 @@ set to be rewritten when you click on build & test.
 ## Caution
 
 If you want to operate from command line, please rewrite launch.json, bt.bash and sub.bash for each abc, arc and agc.
-
-If you use rust-analyzer, please use Rust 1.70 and do not create multiple projects.

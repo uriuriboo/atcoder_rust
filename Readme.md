@@ -44,5 +44,3 @@ build & testをクリックしたときに書き換わるように設定しま�
 ## 注意
 
 コマンドラインから操作をしたい場合はlaunch.jsonとbt.bashとsub.bashはabc、arc、agcごとに書き換えてください
-
-rust-analyzer使う場合はRust1.70を使用し、複数のプロジェクトを作成しないようにしてください
