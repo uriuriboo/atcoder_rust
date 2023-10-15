@@ -3,9 +3,10 @@
 echo give permission to bashfiles
 chmod u+x bt.bash,sub.bash,scripts/bt.bash,scripts/sub.bash,scripts/change_launch.bash
 
-# install rust1.70.0
+# install rustup tools
 echo "1.70" > rust-toolchain
 cargo -V
+rustup component add rustfmt
 
 touch Cargo.toml
 
