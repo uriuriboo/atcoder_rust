@@ -6,8 +6,6 @@ chmod u+x bt.bash,sub.bash,scripts/bt.bash,scripts/sub.bash,scripts/change_launc
 # install rustup tools
 echo "1.70" > rust-toolchain
 cargo -V
-rustup component add rustfmt
-rustup component add clippy
 
 touch Cargo.toml
 
@@ -17,6 +15,9 @@ cargo install cargo-member
 cargo compete i atcoder
 echo clone ac-library-rs
 git clone https://github.com/rust-lang-ja/ac-library-rs.git
+
+rustup component add rustfmt
+rustup component add clippy
 
 echo login to atcoder
 cargo compete l atcoder
