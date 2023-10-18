@@ -7,6 +7,7 @@ chmod u+x bt.bash,sub.bash,scripts/bt.bash,scripts/sub.bash,scripts/change_launc
 echo "1.70" > rust-toolchain
 cargo -V
 rustup component add rustfmt
+rustup component add clippy
 
 touch Cargo.toml
 

@@ -5,4 +5,5 @@
         "editor.formatOnType": true,
         "editor.defaultFormatter": "rust-lang.rust-analyzer",
     },
+    "rust-analyzer.check.command": "clippy"
 }
