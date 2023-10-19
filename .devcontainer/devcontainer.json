@@ -21,8 +21,10 @@
 		"vscode": {
 			"extensions": [
 				// "rust-lang.rust",
+				"EditorConfig.EditorConfig",
 				"forbeslindesay.forbeslindesay-taskrunner",
-				"GitHub.copilot"
+				"GitHub.copilot",
+				"tamasfe.even-better-toml"
 			]
 		}
 	}
