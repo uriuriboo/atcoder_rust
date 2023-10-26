@@ -1,7 +1,8 @@
 FROM mcr.microsoft.com/devcontainers/rust:1-bullseye
 
 RUN echo give permission to bashfiles && \
-    chmod u+x bt.bash,sub.bash,scripts/bt.bash,scripts/sub.bash,scripts/change_launch.bash && \
+    chmod a+x bt.bash sub.bash && \
+    sudo chmod a+x scripts/bt.bash scripts/sub.bash scripts/change_launch.bash && \
     echo "1.70" > rust-toolchain && \
     cargo -V && \
     cargo install cargo-compete && \
