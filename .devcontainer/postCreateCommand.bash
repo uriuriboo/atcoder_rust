@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo give permission to bashfiles
-chmod u+x bt.bash,sub.bash,scripts/bt.bash,scripts/sub.bash,scripts/change_launch.bash
+chmod a+x bt.bash sub.bash 
+sudo chmod a+x scripts/bt.bash scripts/sub.bash scripts/change_launch.bash
 
 # install rustup tools
 echo "1.70" > rust-toolchain
