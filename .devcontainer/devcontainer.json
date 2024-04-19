@@ -1,8 +1,11 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/rust
 {
-	"name": "Rust",
+	"name": "atcoder-rust",
 	"image": "mcr.microsoft.com/devcontainers/rust:1-bullseye",
+	// "build": {
+	// 	"dockerfile": "Dockerfile"
+	// },
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -11,16 +14,21 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "chmod u+x ./.devcontainer/postCreateCommand.bash",
+	"postCreateCommand": "chmod a+x ./.devcontainer/postCreateCommand.bash && bash ./.devcontainer/postCreateCommand.bash",
 	// Configure tool-specific properties.
 	// "customizations": {},
-	"postStartCommand": "./.devcontainer/postCreateCommand.bash",
+	// "postStartCommand": "./.devcontainer/postCreateCommand.bash",
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				// "rust-lang.rust",
+				"EditorConfig.EditorConfig",
 				"forbeslindesay.forbeslindesay-taskrunner",
-				"GitHub.copilot"
+				"GitHub.copilot",
+				"tamasfe.even-better-toml",
+				"ms-python.python",
+				"visualstudioexptteam.vscodein",
+				"ms-vscode.cpptools"
 			]
 		}
 	}

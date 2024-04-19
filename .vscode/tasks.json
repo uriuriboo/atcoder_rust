@@ -44,6 +44,20 @@
 			"problemMatcher": [],
 		},
 		{
+			"label": "build & test release",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/test_release.py",
+				"${file}"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+		},
+		{
 			"label": "submit",
 			"type": "shell",
 			"command": "python3",

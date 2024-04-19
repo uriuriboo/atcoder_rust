@@ -9,7 +9,9 @@ def get_contest_id(path) -> tuple:
     problem_id = parsed_path[6][0]
     return contest_name,contest_id,problem_id
 
+
 contest_name,contest_id,problem_id = get_contest_id(sys.argv[1])
 path = '/workspaces/atcoder_rust/{}{}/src/bin'.format(contest_name,contest_id)
 os.chdir(path)
-cp = subprocess.run(["cargo" ,"compete" ,"s" ,problem_id])
+cp = subprocess.run(["cargo" ,"build"])
+cp = subprocess.run(["cargo" ,"compete" ,"t" ,problem_id ,"--release"])
