@@ -30,23 +30,12 @@ echo login to atcoder
 cargo compete l atcoder
 
 # install rustup tools
-
 echo install rust-toolchain
 echo "1.70" > rust-toolchain
 cargo -V
 
-# cargo-compateのtestで使うため
-# rustup toolchain install 1.42.0
-
 # install online-judge-tools for generater
 # pip3 install online-judge-template-generator
-
-
-
-
-
-
-
 
 
 # rustup install 1.70
