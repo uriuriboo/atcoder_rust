@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo give permission to bashfiles
-chmod a+x bt.bash sub.bash 
+chmod a+x bt.bash sub.bash
 sudo chmod a+x scripts/bt.bash scripts/sub.bash scripts/change_launch.bash
 
 # install rustup tools
@@ -11,6 +11,7 @@ cargo -V
 touch Cargo.toml
 
 # install tools
+echo install cargo tools
 cargo install cargo-compete
 cargo install cargo-member
 cargo compete i atcoder
@@ -22,6 +23,18 @@ rustup component add clippy
 
 echo login to atcoder
 cargo compete l atcoder
+
+
+# install online-judge-tools for generater
+# pip3 install online-judge-template-generator
+
+
+
+
+
+
+
+
 
 # rustup install 1.70
 # rustup install 1.70.0-x86_64-unknown-linux-gnu
