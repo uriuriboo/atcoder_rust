@@ -13,5 +13,6 @@ def get_contest_id(path) -> tuple:
 contest_name,contest_id,problem_id = get_contest_id(sys.argv[1])
 path = '/workspaces/atcoder_rust/{}{}/src/bin'.format(contest_name,contest_id)
 os.chdir(path)
+cp = subprocess.run(["/workspaces/atcoder_rust/scripts/change_launch.bash",contest_name,contest_id,problem_id])
 cp = subprocess.run(["cargo" ,"build"])
 cp = subprocess.run(["cargo" ,"compete" ,"t" ,problem_id ,"--release"])
