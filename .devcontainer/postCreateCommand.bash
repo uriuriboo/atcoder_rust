@@ -1,16 +1,22 @@
 #!/bin/bash
 
 echo give permission to bashfiles
-chmod a+x bt.bash sub.bash 
-sudo chmod a+x scripts/bt.bash scripts/sub.bash scripts/change_launch.bash
+chmod a+x bt.bash sub.bash
+chmod a+x scripts/change_launch.bash
 
-# install rustup tools
-echo "1.70" > rust-toolchain
-cargo -V
 
+# 先にrust-toolchainをインストールするとcargo-competeがコンパイルできなかった2024/4/19
+if [ -f "rust-toolchain" ]; then
+    rm rust-toolchain
+fi
+
+# cargo-memberで書き込むため
+echo make Cargo.toml
 touch Cargo.toml
+sudo chmod a+w Cargo.toml
 
-# install tools
+# install cargo tools
+echo install cargo tools
 cargo install cargo-compete
 cargo install cargo-member
 cargo compete i atcoder
@@ -22,6 +28,15 @@ rustup component add clippy
 
 echo login to atcoder
 cargo compete l atcoder
+
+# install rustup tools
+echo install rust-toolchain
+echo "1.70" > rust-toolchain
+cargo -V
+
+# install online-judge-tools for generater
+# pip3 install online-judge-template-generator
+
 
 # rustup install 1.70
 # rustup install 1.70.0-x86_64-unknown-linux-gnu
