@@ -1,6 +1,5 @@
 import os,sys
 import subprocess
-from urllib.request import urlopen
 
 def get_contest_id(path) -> tuple:
     parsed_path = path.split("/")
