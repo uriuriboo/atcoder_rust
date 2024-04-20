@@ -7,6 +7,8 @@ workspaceFolder=/workspaces/atcoder_rust
 workspaceRoot=/workspaces/atcoder_rust
 echo change launch.json for debag ${contest_name}${contest_id}-${problem_id}
 
+# pwd
+
 echo -e \
 "{\n\
     \"version\": \"0.2.0\",\n\
@@ -28,4 +30,4 @@ echo -e \
         }\n\
     ]\n\
 }"\
-> .vscode/launch.json
+> $workspaceRoot/.vscode/launch.json
