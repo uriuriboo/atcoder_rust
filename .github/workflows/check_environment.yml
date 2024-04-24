@@ -23,6 +23,8 @@ jobs:
     - name: check cargo-compete
       run: |
         cargo compete new abc320
+        cargo member include abc320
+        pwd
         cd abc320/src/bin/
         cargo compete test a
     - name: check formatter
