@@ -16,6 +16,11 @@ jobs:
       run: |
         pwd
         ls -a
+        cd .github
+        ls -a
+        cd workflows
+        ls -a
+        cat abc320a.rs
 
     - name: Set up Rust
       uses: actions-rust-lang/setup-rust-toolchain@v1
