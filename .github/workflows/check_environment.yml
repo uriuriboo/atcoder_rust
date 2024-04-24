@@ -26,7 +26,9 @@ jobs:
         cargo compete new abc320
         cargo member include abc320
         pwd
+        cat .github/workflows/abc320a.rs > abc320/src/bin/a.rs
         cd abc320/src/bin/
+        cargo build
         cargo compete test a
     - name: check formatter
       run: cargo fmt
