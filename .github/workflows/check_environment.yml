@@ -1,0 +1,29 @@
+name: Check Environment
+
+on:
+  push:
+    branches: '**'
+
+jobs:
+  run_post_create_command:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Rust
+      uses: actions-rust-lang/setup-rust-toolchain@v1
+      with:
+        rust-version: stable  # 使用する Rust のバージョンを指定
+
+    - name: Run postCreateCommand.bash
+      run: |
+        bash .devcontainer/postCreateCommand.bash
+    - name: check cargo-compete
+      run: |
+        cargo compete new abc320
+        cd abc320/src/bin/
+        cargo compete test a
+    - name: check formatter
+      run: cargo fmt
