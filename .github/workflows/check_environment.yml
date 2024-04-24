@@ -1,0 +1,35 @@
+name: Check Environment
+
+on:
+  push:
+    branches: '**'
+
+jobs:
+  run_post_create_command:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Rust
+      uses: actions-rust-lang/setup-rust-toolchain@v1
+      with:
+        rust-version: stable  # 使用する Rust のバージョンを指定
+
+    - name: Run postCreateCommand.bash
+      run: |
+        bash .devcontainer/postCreateCommand.bash
+        rustup install 1.70.0-x86_64-unknown-linux-gnu
+    - name: check cargo-compete
+      continue-on-error: true
+      run: |
+        cargo compete new abc325
+        cargo member include abc325
+        pwd
+        cat .github/ciabc325a.rs > abc325/src/bin/a.rs
+        cd abc325/src/bin/
+        cargo build
+        cargo compete test a
+    - name: check formatter
+      run: cargo fmt
