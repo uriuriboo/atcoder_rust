@@ -12,16 +12,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Check folder
-      run: |
-        pwd
-        ls -a
-        cd .github
-        ls -a
-        cd workflows
-        ls -a
-        cat abc320a.rs
-
     - name: Set up Rust
       uses: actions-rust-lang/setup-rust-toolchain@v1
       with:
@@ -36,6 +26,7 @@ jobs:
         cargo compete new abc320
         cargo member include abc320
         pwd
+        cat .github/ciabc320.rs > abc320/src/bin/a.rs
         cd abc320/src/bin/
         cargo build
         cargo compete test a
