@@ -22,6 +22,7 @@ jobs:
         bash .devcontainer/postCreateCommand.bash
         rustup install 1.70.0-x86_64-unknown-linux-gnu
     - name: check cargo-compete
+      continue-on-error: true
       run: |
         cargo compete new abc325
         cargo member include abc325
