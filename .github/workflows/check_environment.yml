@@ -29,7 +29,7 @@ jobs:
         pwd
         cat .github/ciabc325a.rs > abc325/src/bin/a.rs
         cd abc325/src/bin/
-        cargo build --bin a
+        cargo build --bin abc325-a
         cargo compete test a
     - name: check formatter
       run: cargo fmt
