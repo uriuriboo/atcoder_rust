@@ -19,15 +19,15 @@ sudo chmod a+w Cargo.toml
 echo install cargo tools
 cargo install cargo-compete
 cargo install cargo-member
-cargo compete i atcoder
+# cargo compete i atcoder
 echo clone ac-library-rs
 git clone https://github.com/rust-lang-ja/ac-library-rs.git
 
 rustup component add rustfmt
 rustup component add clippy
 
-echo login to atcoder
-cargo compete l atcoder
+# echo login to atcoder
+# cargo compete l atcoder
 
 # install rustup tools
 echo install rust-toolchain

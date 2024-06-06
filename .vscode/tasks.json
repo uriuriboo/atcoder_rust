@@ -2,7 +2,6 @@
 	"version": "2.0.0",
 	"tasks": [
 		// {
-			
 		// 	"type": "cargo",
 		// 	"command": "build",
 		// 	"problemMatcher": [
@@ -15,9 +14,7 @@
 		// 	"type": "shell",
 		// 	"command":[ "cd ${workspaceFolder}/abc253/src/bin/ & pwd",
 		// 		//"cargo build & cargo compete t ${fileBasenameNoExtension}",
-				
 		// 	],
-			
 		// 	"group": "build",
 		// 	"label": "rust: cd cargo build"
 		// },
@@ -105,7 +102,20 @@
 				"clear": true
 			},
 			"problemMatcher": []
-		}
+		},
+		{
+			"label": "login",
+			"type": "shell",
+			"command": "cargo compate",
+			"args": [
+				"login",
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+		},
 	],
 	"inputs": [
 		{
