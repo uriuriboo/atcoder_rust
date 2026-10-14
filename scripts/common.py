@@ -17,4 +17,4 @@ def change_launch(contest_name,contest_id,problem_id):
     subprocess.run([WORKSPACE + "/scripts/change_launch.bash",contest_name,contest_id,problem_id])
 
 def build(contest_name,contest_id,problem_id):
-    subprocess.run(["cargo", "build", "--bin" , contest_name + contest_id + "-" + problem_id])
+    return subprocess.run(["cargo", "build", "--bin" , contest_name + contest_id + "-" + problem_id])

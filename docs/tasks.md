@@ -10,9 +10,10 @@
 | build & test | `scripts/test.py ${file}` | 使う | `cargo compete t` |
 | build & test release | `scripts/test_release.py ${file}` | 使う | `cargo compete t --release` |
 | submit | `scripts/sub.py ${file}` | 使う | `cargo compete s` |
+| stress: init / hack / test | `scripts/stress.py <mode> ${file}` | 使う | なし（`oj` を使う） |
 | visualize graph | `scripts/visualize.py input.txt` | 使わない | なし |
 | visualize graph (directed) | `scripts/visualize.py input.txt --directed` | 使わない | なし |
-| new contest | `cargo compete new` → `cargo member include` | 使わない（コンテスト ID を入力する） | `cargo compete new` |
+| new contest | `cargo compete new` → edition を 2024 に書き換え → `cargo member include` | 使わない（コンテスト ID を入力する） | `cargo compete new` |
 | login | `cargo compete login atcoder` | 使わない | `cargo compete login` |
 
 ## 共通処理（`scripts/common.py`）
@@ -50,10 +51,10 @@ build、test、submit の各スクリプトは、最初に次の処理を行う�
 
 ### build & test release
 
-共通処理の 1〜4 のあと、`cargo compete t <problem> --release` を実行する。
+共通処理の 1〜3 のあと、`cargo compete t <problem> --release` を実行する。
 
-- 共通処理のビルドは debug なので、テストの前にもう一度 release ビルドが走る。
-- `launch.json` が指すのは debug のバイナリのまま。
+- 共通処理の debug ビルド（4）は行わない。`cargo compete t --release` の release ビルドだけを行う（[build_performance.md](build_performance.md) の要件 5）。
+- `launch.json` は書き換えるが、debug のバイナリは更新されない。
 
 ### submit
 
@@ -62,6 +63,28 @@ build、test、submit の各スクリプトは、最初に次の処理を行う�
 - 提出するのはソースファイルそのもの（`compete.toml` の `[submit] kind = "file"`）。
 - 言語 ID は `language_id = "6088"`（Rust 1.89.0）。
 - AtCoder の Cloudflare Turnstile が原因で、ログインできず失敗する場合がある。
+
+### stress: init / stress: hack / stress: test
+
+サンプル以外のテストケースを、ランダムな入力と愚直解から作る。使い方は [stress_test.md](stress_test.md)。online-judge-tools（`oj`）の `generate-input` と `test` を使う。解答の `a.rs` と、下の `gen.py`・`naive.py` のどれを開いていても実行できる。
+
+ファイルは `<contest>/stress/<problem>/` に置く（コンテストのディレクトリごと gitignore 対象）。
+
+```text
+abc325/stress/a/
+├── gen.py      入力を 1 ケース分、標準出力に書き出す
+├── naive.py    愚直解（遅くてよいので、確実に正しく）
+└── test/       見つけた反例（hack-000.in / hack-000.out など）
+```
+
+1. **stress: init**：`gen.py` と `naive.py` の雛形を作る。既にあれば上書きしない。問題に合わせて書き換える。
+2. **stress: hack**：共通処理の 1〜4 のあと、`oj generate-input --hack-actual <解答> --hack-expected "python3 naive.py" "python3 gen.py"` を実行する。
+   - `gen.py` で入力を作り、解答と `naive.py` の出力が食い違うか、解答が RE になるまで繰り返す。止めるときは Ctrl+C。
+   - 見つけた反例は `test/hack-XXX.in` と、`naive.py` による正解 `test/hack-XXX.out` に保存される。
+   - 反例は `input.txt` にもコピーするので、そのまま F5 でデバッグできる。
+3. **stress: test**：共通処理の 1〜4 のあと、`oj test` で `test/` のケースをすべて実行する。直したあとに、これまでの反例で回帰テストするのに使う。
+
+`gen.py` の値は小さくしておくと、反例が見つかったときに手で追いやすい。`oj` は `postCreateCommand.bash`（devcontainer では Dockerfile）で pipx から入れている。
 
 ### visualize graph / visualize graph (directed)
 
@@ -74,12 +97,13 @@ build、test、submit の各スクリプトは、最初に次の処理を行う�
 
 ### new contest
 
-コンテスト ID（例：`abc325`）を入力すると、次の 2 つを順に実行する。
+コンテスト ID（例：`abc325`）を入力すると、次の 3 つを順に実行する。
 
 1. `cargo compete new <contest>`：パッケージ `<contest>/` を生成し、サンプルを `testcases/` にダウンロードする。
    - 解答ファイルは、`compete.toml` の `[template]` から作られる。中身は `proconio` と `#[fastout]` を使った雛形。
-   - `Cargo.toml` には、`[template.new]` の edition（2024）と、AtCoder の環境に合わせてバージョンを固定した依存クレートが書き込まれる。
-2. `cargo member include <contest>`：ルートの `Cargo.toml` のワークスペースに、生成したパッケージを追加する。
+   - `Cargo.toml` には、`[template.new]` の edition と、AtCoder の環境に合わせてバージョンを固定した依存クレートが書き込まれる。
+2. `sed` で `<contest>/Cargo.toml` の edition を `2021` から `2024` に書き換える。cargo-compete は `compete.toml` の edition に `2024` を書くと読み込みに失敗する（2015/2018/2021 にしか対応していない）ため、`compete.toml` には `2021` を書いておき、生成後に AtCoder と同じ 2024 にする。
+3. `cargo member include <contest>`：ルートの `Cargo.toml` のワークスペースに、生成したパッケージを追加する。
 
 ### login
 
@@ -99,6 +123,7 @@ build、test、submit の各スクリプトは、最初に次の処理を行う�
 - [ ] テスト用のツールチェーンを固定できる
 - [ ] ログインに Cookie を使える（Turnstile 対策）
 - [ ] 提出できる。できない場合は、ブラウザで提出する運用にする
+- [ ] [build_performance.md](build_performance.md) の高速化の要件を満たせる（ビルド先を `target/` から変えるツールでは、要件 1 のボリュームのマウント先も変える）
 
 ツールに依存しない部分（パスの解析、`launch.json` の書き換え、`cargo build --bin`、グラフの可視化）は、そのまま流用できる。差し替えが必要なのは、次の 4 か所だけ。
 

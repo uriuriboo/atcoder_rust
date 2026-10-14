@@ -25,6 +25,7 @@ jobs:
       continue-on-error: true
       run: |
         cargo compete new abc325
+        sed -i 's/^edition = "2021"$/edition = "2024"/' abc325/Cargo.toml
         cargo member include abc325
         pwd
         cat .github/ciabc325a.rs > abc325/src/bin/a.rs

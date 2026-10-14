@@ -2,10 +2,14 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/rust
 {
 	"name": "atcoder-rust",
-	"image": "mcr.microsoft.com/devcontainers/rust:1-trixie",
-	// "build": {
-	// 	"dockerfile": "Dockerfile"
-	// },
+	// cargo-compete などのビルドをイメージのレイヤーにキャッシュするため Dockerfile を使う
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	// Windows ホストの bind mount はファイル I/O が遅いため、ビルド成果物は名前付きボリュームに置く
+	"mounts": [
+		"source=atcoder-rust-target,target=/workspaces/atcoder_rust/target,type=volume"
+	],
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

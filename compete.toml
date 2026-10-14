@@ -35,7 +35,9 @@ fn main(){
 
 [template.new]
 # `edition` for `Cargo.toml`.
-edition = "2024"
+# cargo-compete は "2024" を受け付けないため "2021" を書き、
+# タスク "new contest"（と CI）で cargo compete new の後に "2024" に書き換える
+edition = "2021"
 # `profile` for `Cargo.toml`.
 #
 # By setting this, you can run tests with `opt-level=3` while enabling `debug-assertions` and `overflow-checks`.

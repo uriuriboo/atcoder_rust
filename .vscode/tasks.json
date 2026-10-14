@@ -83,6 +83,39 @@
 			"problemMatcher": [],
 		},
 		{
+			"label": "stress: init",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/stress.py",
+				"init",
+				"${file}"
+			],
+			"problemMatcher": [],
+		},
+		{
+			"label": "stress: hack",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/stress.py",
+				"hack",
+				"${file}"
+			],
+			"problemMatcher": [],
+		},
+		{
+			"label": "stress: test",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/stress.py",
+				"test",
+				"${file}"
+			],
+			"problemMatcher": [],
+		},
+		{
 			"label": "visualize graph",
 			"type": "shell",
 			"command": "python3",
@@ -113,6 +146,17 @@
 			]
 		},
 		{
+			// cargo-compete は edition 2024 を生成できないため、AtCoder に合わせて書き換える
+			"label": "rust: set edition 2024",
+			"type": "shell",
+			"command": "sed",
+			"args": [
+				"-i",
+				"s/^edition = \"2021\"$/edition = \"2024\"/",
+				"${input:contest}/Cargo.toml"
+			]
+		},
+		{
 			"label": "rust: cargo member include",
 			"type": "cargo",
 			"command": "member",
@@ -126,6 +170,7 @@
 			"dependsOrder": "sequence",
 			"dependsOn": [
 				"rust: cargo compete new",
+				"rust: set edition 2024",
 				"rust: cargo member include",
 			],
 			"presentation": {

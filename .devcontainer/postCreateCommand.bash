@@ -18,10 +18,34 @@ sudo chmod a+w Cargo.toml
 echo make input.txt
 touch input.txt
 
+# target/ は名前付きボリューム（devcontainer.json の mounts）で root 所有で作られるため、所有者を変える
+if [ -d target ] && [ "$(stat -c %u target)" != "$(id -u)" ]; then
+    echo change owner of target
+    sudo chown -R "$(id -u):$(id -g)" target
+fi
+
+# グラフ可視化（scripts/visualize.py）用の graphviz と、リンカ（.cargo/config.toml）用の mold
+# devcontainer では Dockerfile でインストール済み。mold はビルドより前に必要
+if ! command -v dot > /dev/null || ! command -v mold > /dev/null; then
+    echo install graphviz and mold
+    sudo apt-get update
+    sudo apt-get install -y graphviz mold
+fi
+
+# ランダムテスト（scripts/stress.py）用の online-judge-tools（oj）
+# devcontainer では Dockerfile でインストール済み。Debian では pip で直接入れられない（PEP 668）ため pipx を使い、
+# 全ユーザーから使えるよう /usr/local/bin に置く
+if ! command -v oj > /dev/null; then
+    echo install online-judge-tools
+    command -v pipx > /dev/null || { sudo apt-get update; sudo apt-get install -y pipx; }
+    sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install online-judge-tools
+fi
+
 # install cargo tools
+# devcontainer では Dockerfile でインストール済み。CI など未インストールの環境でだけビルドする
 echo install cargo tools
-cargo install cargo-compete
-cargo install cargo-member
+command -v cargo-compete > /dev/null || cargo install cargo-compete
+command -v cargo-member > /dev/null || cargo install cargo-member
 
 # compete.toml はリポジトリで管理しているため、無いときだけ生成する（上書き防止）
 if [ ! -f "compete.toml" ]; then
@@ -31,11 +55,6 @@ fi
 
 rustup component add rustfmt
 rustup component add clippy
-
-# グラフ可視化（scripts/visualize.py）用
-echo install graphviz
-sudo apt-get update
-sudo apt-get install -y graphviz
 
 # ユーザー名とパスワードの入力が必要なため CI では行わない
 # 失敗してもセットアップは続行する（後からタスクランナーの "login" でもログインできる）
@@ -48,10 +67,6 @@ fi
 echo install rust-toolchain
 echo "1.89.0" > rust-toolchain
 cargo -V
-
-# install online-judge-tools for generater
-# pip3 install online-judge-template-generator
-
 
 # rustup install 1.89.0
 # rustup install 1.89.0-x86_64-unknown-linux-gnu

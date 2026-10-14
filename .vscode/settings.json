@@ -5,5 +5,9 @@
         "editor.formatOnType": true,
         "editor.defaultFormatter": "rust-lang.rust-analyzer",
     },
-    "rust-analyzer.check.command": "clippy"
+    "rust-analyzer.check.command": "clippy",
+    // 保存時のチェックを開いているパッケージだけにする（コンテストが増えても遅くならない）
+    "rust-analyzer.check.workspace": false,
+    // タスクの cargo build と target/ のロックを取り合わないよう、別のディレクトリを使う
+    "rust-analyzer.cargo.targetDir": true
 }
