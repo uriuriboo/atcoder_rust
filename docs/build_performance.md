@@ -64,7 +64,7 @@
 
 **実現方法**
 - `devcontainer.json` は `image` を直接指定せず、`.devcontainer/Dockerfile` からビルドする。
-- Dockerfile では、cargo-compete、cargo-member、rustfmt、clippy、graphviz、mold をインストールする。これらはイメージのレイヤーにキャッシュされる。
+- Dockerfile では、cargo-compete、cargo-member、rustfmt、clippy、graphviz、mold、online-judge-tools、uv と Python 3.15 をインストールする。これらはイメージのレイヤーにキャッシュされる。
 - `postCreateCommand.bash` では、コマンドが見つからないときだけインストールする。CI は Dockerfile を使わないので、このスクリプトがインストールを行う。
 
 **注意**

@@ -31,8 +31,10 @@ A = list(map(int, input().split()))
 print(sum(A))
 '''
 
-GEN = 'python3 gen.py'
-NAIVE = 'python3 naive.py'
+# gen.py・naive.py は、システムの python3 ではなく uv で入れた新しい Python で動かす（Dockerfile）
+PYTHON = 'python3.15'
+GEN = PYTHON + ' gen.py'
+NAIVE = PYTHON + ' naive.py'
 
 
 def write_if_absent(path, content):

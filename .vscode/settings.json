@@ -5,6 +5,8 @@
         "editor.formatOnType": true,
         "editor.defaultFormatter": "rust-lang.rust-analyzer",
     },
+    // Python（gen.py・naive.py）は uv で入れた新しい Python で動かすので、補完もそれに合わせる（Dockerfile）
+    "python.defaultInterpreterPath": "/usr/local/bin/python3.15",
     // Python（gen.py・naive.py）は保存時に Ruff でフォーマットする
     "[python]": {
         "editor.formatOnSave": true,

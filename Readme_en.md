@@ -14,6 +14,7 @@ Open the repository as a Dev Container in VS Code and you get a Rust environment
 - Rust 1.89.0 (edition 2024) and the same crate versions as AtCoder's October 2025 language environment (proconio, ac-library-rs, itertools, and more)
 - cargo-compete (fetch problems, test, submit) and cargo-member (add a contest to the workspace)
 - rustfmt, clippy, graphviz (graph visualization), and mold (a fast linker)
+- Python 3.15 for the brute-force solutions and input generators of random testing (installed with uv)
 - The container tries to log in to AtCoder when it is created. If that fails, log in later with the "login" task
 
 ### Tasks

@@ -24,7 +24,7 @@ Open the repository as a Dev Container in VS Code and you get a Rust environment
 ### No setup needed
 
 - The Rust version (1.89.0, edition 2024) and the versions of the available crates (about 65, including proconio, ac-library-rs, and itertools) are pinned to AtCoder's October 2025 language environment. Code that compiles locally is unlikely to fail to compile on AtCoder.
-- Tools such as cargo-compete, clippy, rustfmt, online-judge-tools, and Graphviz are all installed when the container is created.
+- Tools such as cargo-compete, clippy, rustfmt, online-judge-tools, Graphviz, and Python 3.15 for brute-force solutions are all installed when the container is created.
 
 ### The problem is detected from the open file
 

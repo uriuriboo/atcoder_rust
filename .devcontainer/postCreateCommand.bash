@@ -45,6 +45,14 @@ if ! command -v oj > /dev/null; then
     sudo env PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install online-judge-tools
 fi
 
+# ランダムテストの gen.py・naive.py を動かす新しい Python。システムの python3（Debian の 3.13）とは別に uv で入れ、
+# 全ユーザーから使えるよう /usr/local/bin/python3.15 に置く。devcontainer では Dockerfile でインストール済み
+if ! command -v python3.15 > /dev/null; then
+    echo install python3.15
+    command -v uv > /dev/null || sudo env PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install uv
+    sudo env UV_PYTHON_INSTALL_DIR=/opt/uv/python UV_PYTHON_BIN_DIR=/usr/local/bin "$(command -v uv)" python install 3.15
+fi
+
 # install cargo tools
 # devcontainer では Dockerfile でインストール済み。CI など未インストールの環境でだけビルドする
 echo install cargo tools

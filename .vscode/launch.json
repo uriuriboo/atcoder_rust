@@ -21,7 +21,8 @@
             "type": "debugpy",
             "request": "launch",
             "name": "Debug Python",
-            "program": "/workspaces/atcoder_rust/scripts/debug_python.py",
+            "python": "/usr/local/bin/python3.15",
+            "program":"/workspaces/atcoder_rust/scripts/debug_python.py",
             "args": [
                 "${file}"
             ],

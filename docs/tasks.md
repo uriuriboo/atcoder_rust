@@ -79,7 +79,7 @@ abc325/stress/a/
 ```
 
 1. **stress: init**：`gen.py` と `naive.py` の雛形を作る。既にあれば上書きしない。問題に合わせて書き換える。
-2. **stress: hack**：共通処理の 1〜4 のあと、`oj generate-input --hack-actual <解答> --hack-expected "python3 naive.py" "python3 gen.py"` を実行する。
+2. **stress: hack**：共通処理の 1〜4 のあと、`oj generate-input --hack-actual <解答> --hack-expected "python3.15 naive.py" "python3.15 gen.py"` を実行する。gen.py・naive.py は、システムの python3（Debian の 3.13）ではなく、Dockerfile で uv から入れた Python 3.15 で動かす。
    - `gen.py` で入力を作り、解答と `naive.py` の出力が食い違うか、解答が RE になるまで繰り返す。止めるときは Ctrl+C。
    - 見つけた反例は `test/hack-XXX.in` と、`naive.py` による正解 `test/hack-XXX.out` に保存される。
    - 反例は `input.txt` にもコピーするので、そのまま F5 でデバッグできる。

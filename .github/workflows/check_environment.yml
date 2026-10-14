@@ -28,6 +28,8 @@ jobs:
     - name: Run postCreateCommand.bash
       run: |
         bash .devcontainer/postCreateCommand.bash
+    - name: check python for stress test
+      run: python3.15 --version
     - name: check cargo-compete
       continue-on-error: true
       run: |

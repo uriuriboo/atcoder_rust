@@ -16,6 +16,7 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境に�
 - AtCoder の 2025年10月の言語環境と同じ Rust 1.89.0（edition 2024）と、同じバージョンのクレート（proconio、ac-library-rs、itertools など）
 - cargo-compete（問題の取得・テスト・提出）と cargo-member（コンテストをワークスペースに追加）
 - rustfmt、clippy、graphviz（グラフ可視化）、mold（高速なリンカ）
+- Python 3.15（ランダムテストの愚直解・入力生成用。uv で入れます）
 - コンテナ作成時に AtCoder へのログインを試みます。失敗した場合は、後からタスク「login」でログインできます
 
 ### タスクランナーでできること

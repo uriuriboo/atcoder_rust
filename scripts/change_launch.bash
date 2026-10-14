@@ -33,7 +33,8 @@ echo -e \
             \"type\": \"debugpy\",\n\
             \"request\": \"launch\",\n\
             \"name\": \"Debug Python\",\n\
-            \"program\": \"/workspaces/atcoder_rust/scripts/debug_python.py\",\n\
+            \"python\": \"/usr/local/bin/python3.15\",\n\
+            \"program\":\"/workspaces/atcoder_rust/scripts/debug_python.py\",\n\
             \"args\": [\n\
                 \"\${file}\"\n\
             ],\n\

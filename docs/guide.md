@@ -24,7 +24,7 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境と�
 ### 環境構築がいらない
 
 - Rust のバージョン（1.89.0、edition 2024）と、使えるクレート（proconio、ac-library-rs、itertools など約 65 個）のバージョンが、AtCoder の 2025 年 10 月の言語環境と同じに固定されている。手元で通ったのに AtCoder ではコンパイルエラー、ということが起きにくい。
-- cargo-compete、clippy、rustfmt、online-judge-tools、Graphviz などの道具は、コンテナを作るときに全部入る。
+- cargo-compete、clippy、rustfmt、online-judge-tools、Graphviz、愚直解用の Python 3.15 などの道具は、コンテナを作るときに全部入る。
 
 ### 開いているファイルから問題を判定する
 
