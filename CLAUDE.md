@@ -1,0 +1,49 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## このリポジトリについて
+
+[cargo-compete](https://github.com/qryxip/cargo-compete) と `cargo-member` を使って AtCoder の問題を Rust で解くための VS Code devcontainer 環境。アプリケーションではなくテンプレート兼作業場所であり、コンテストの解答ディレクトリ（`abc*`、`arc*`、`agc*`）、ルートの `Cargo.toml`、`Cargo.lock`、`target/`、`input.txt` はすべて gitignore 対象でローカルで生成される。
+
+すべて devcontainer 内（リポジトリが `/workspaces/atcoder_rust` にマウントされた状態）で動かす前提。スクリプトはこのパスをハードコードしているため、Windows ホスト側のチェックアウトからはそのままでは動かない。
+
+## セットアップ（devcontainer）
+
+`.devcontainer/postCreateCommand.bash` は、空のルート `Cargo.toml` を作成し（cargo-member がワークスペースのメンバーを書き込むため）、空の `input.txt` を作成し、`cargo-compete` と `cargo-member` をインストールし、rustfmt と clippy を追加し、`rust-toolchain` = `1.89.0` でツールチェーンを固定する。cargo-compete は固定したツールチェーンではなく最新の stable でビルドするため、`rust-toolchain` を書き込む**前に** cargo-compete をインストールする。`compete.toml` が無いときだけ `cargo compete init atcoder` を実行する（管理している設定の上書き防止）。CI 以外では `cargo compete login atcoder` も実行するが、失敗してもセットアップは止めず、後からタスク "login" でログインし直せる。
+
+## よく使うコマンド
+
+```bash
+# 新しいコンテストを開始：パッケージを生成し、ルートのワークスペースに追加
+cargo compete new abc325
+cargo member include abc325
+
+# 1問をビルドしてサンプルでテスト（<contest>/src/bin/ で実行）
+cargo build --bin abc325-a
+cargo compete test a            # リリースモードでテストするなら --release を付ける
+
+# 提出
+cargo compete submit a
+
+# ショートカット（コンテストの接頭辞は "abc" にハードコード。arc/agc の場合は書き換える）
+./scripts/build_test.bash 325 a   # ビルド + テスト
+./scripts/submit.bash 325 a       # 提出
+```
+
+普段の操作はタスクランナー（`.vscode/tasks.json`）から行う前提で、コマンドライン用のスクリプトも含めてすべて `scripts/` にまとめてある。`scripts/test.bash` は online-judge-tools（`oj`）でテストするための、手動実行用のスクリプト。cargo-compete の流れとは別物で、`oj` はセットアップでインストールされないため、使うときは自分で入れる。
+
+VS Code のタスク（`.vscode/tasks.json` の "build"、"build & test"、"build & test release"、"submit"、"new contest"）は、開いているファイルを引数にして `scripts/build.py`、`scripts/test.py`、`scripts/test_release.py`、`scripts/sub.py` を呼び出す。ビルドは `--bin` で開いている問題だけを対象にする。共通の処理（パスの解析、bin ディレクトリへの移動、`launch.json` の書き換え、`--bin` 指定のビルド）は `scripts/common.py` にまとめてある。これらのスクリプトはファイルパス `/workspaces/atcoder_rust/<abc325>/src/bin/<a>.rs` からコンテストと問題を取り出す（パスの 3 番目の要素がコンテスト、6 番目が問題）。コンテスト名は 3 文字の接頭辞を持つ前提。
+
+## 主な構成
+
+- `compete.toml` は cargo-compete の設定。解答テンプレート（`proconio` と `#[fastout]`）、AtCoder の 2025 年 10 月の言語環境（Rust 1.89.0）に合わせて固定した依存クレート群（edition 2024）、テスト用ツールチェーン `1.89.0`、提出用の `language_id = "6088"` を定義している。AtCoder の環境が更新されたら、[公式の言語一覧](https://img.atcoder.jp/file/language-update/2025-10/language-list.html) に合わせて、これらと `.devcontainer/postCreateCommand.bash`・CI のバージョンをまとめて更新する。
+- バイナリの命名：コンテスト `abc325` の問題 `a` は、ファイル `abc325/src/bin/a.rs`、bin ターゲット `abc325-a`、実行ファイル `target/debug/abc325-a` になる。サンプルテストは `abc325/testcases/a.yml` に置かれる。
+- `.cargo/config.toml` により、全コンテストでリポジトリ直下の `target/` を共有する。
+- デバッグ：`scripts/change_launch.bash` が `.vscode/launch.json` を書き換え、LLDB の `program` を現在の問題のバイナリに、標準入力を `input.txt` に向ける。"build & test" タスクではこれが自動で行われる。コマンドラインからビルドした場合は `launch.json` を手動で書き換える。
+- グラフ可視化：`scripts/visualize.py` が `input.txt` を読み、Graphviz で `graph.png` を出力する（タスク "visualize graph" / "visualize graph (directed)"）。1行目が `N` なら木、`N M` なら M 本の辺として自動判定し、3列目は重みとして扱う。標準ライブラリのみで、`dot` コマンドは `postCreateCommand.bash` で apt から入れる。
+- `library/src/*.rs` は単体のスニペット集（ダイクストラ、BFS/DFS、エラトステネスの篩、二部グラフ判定など）で、それぞれコピペ用に `main` を含む完全なプログラムとして書かれている。`library/src/lib.rs` に組み込まれたモジュールでは**ない**。エディタ用スニペット（`tmplt`、`rep`、`bins` など）は `.vscode/rust.code-snippets` にある。
+
+## CI
+
+`.github/workflows/check_environment.yml` は `postCreateCommand.bash` を実行し、`abc325` を生成して `.github/ciabc325a.rs` を `a.rs` としてコピーし、ビルドとテストを行い（失敗しても続行）、最後に `cargo fmt` を実行する。

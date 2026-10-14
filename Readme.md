@@ -12,7 +12,7 @@
 #### コマンドラインからビルドとテスト
 
 ```bash:
-./bt.bash コンテストの数字 問題のアルファベット
+./scripts/build_test.bash コンテストの数字 問題のアルファベット
 ```
 
 #### クリックでビルドとテスト
@@ -26,7 +26,7 @@
 #### コマンドラインから提出
 
 ```bash:
-./sub.bash コンテストの数字 問題のアルファベット
+./scripts/submit.bash コンテストの数字 問題のアルファベット
 ```
 
 #### クリックで提出
@@ -43,4 +43,4 @@ build & testをクリックしたときに書き換わるように設定しま�
 
 ## 注意
 
-コマンドラインから操作をしたい場合はlaunch.jsonとbt.bashとsub.bashはabc、arc、agcごとに書き換えてください
+コマンドラインから操作をしたい場合はlaunch.jsonとscripts/build_test.bashとscripts/submit.bashはabc、arc、agcごとに書き換えてください

@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/rust
 {
 	"name": "atcoder-rust",
-	"image": "mcr.microsoft.com/devcontainers/rust:1-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/rust:1-trixie",
 	// "build": {
 	// 	"dockerfile": "Dockerfile"
 	// },
@@ -23,12 +23,12 @@
 			"extensions": [
 				// "rust-lang.rust",
 				"EditorConfig.EditorConfig",
-				"forbeslindesay.forbeslindesay-taskrunner",
-				"GitHub.copilot",
+				"SanaAjani.taskrunnercode",
 				"tamasfe.even-better-toml",
 				"ms-python.python",
-				"visualstudioexptteam.vscodein",
-				"ms-vscode.cpptools"
+				"ms-vscode.cpptools",
+				"lorenzopirro.rust-flash-snippets",
+				"dustypomerleau.rust-syntax"
 			]
 		}
 	}

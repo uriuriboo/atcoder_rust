@@ -10,7 +10,7 @@ For detailed usage [here](https://qiita.com/rokoooouribo/items/76a0057c75694fd94
 #### Build and test from command line
 
 ```bash:
-./bt.bash (Contest Number) (Alphabet in question)
+./scripts/build_test.bash (Contest Number) (Alphabet in question)
 ```
 
 #### Click to build and test
@@ -24,7 +24,7 @@ With the .rs file you want to test in vscode, click build & test in TASKRUNNER i
 #### Submit from  command line
 
 ```bash:
-./sub.bash (Contest Number) (Alphabet in question)
+./scripts/submit.bash (Contest Number) (Alphabet in question)
 ````
 
 #### Click to submit
@@ -41,4 +41,4 @@ set to be rewritten when you click on build & test.
 
 ## Caution
 
-If you want to operate from command line, please rewrite launch.json, bt.bash and sub.bash for each abc, arc and agc.
+If you want to operate from command line, please rewrite launch.json, scripts/build_test.bash and scripts/submit.bash for each abc, arc and agc.

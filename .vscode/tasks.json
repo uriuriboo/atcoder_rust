@@ -27,6 +27,20 @@
 		// 	"label": "pwd"
 		// },
 		{
+			"label": "build",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/build.py",
+				"${file}"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+		},
+		{
 			"label": "build & test",
 			"type": "shell",
 			"command": "python3",
@@ -69,6 +83,27 @@
 			"problemMatcher": [],
 		},
 		{
+			"label": "visualize graph",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/visualize.py",
+				"${workspaceFolder}/input.txt"
+			],
+			"problemMatcher": [],
+		},
+		{
+			"label": "visualize graph (directed)",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/visualize.py",
+				"${workspaceFolder}/input.txt",
+				"--directed"
+			],
+			"problemMatcher": [],
+		},
+		{
 			"label": "rust: cargo compete new",
 			"type": "cargo",
 			"command": "compete",
@@ -106,9 +141,10 @@
 		{
 			"label": "login",
 			"type": "shell",
-			"command": "cargo compate",
+			"command": "cargo compete",
 			"args": [
 				"login",
+				"atcoder",
 			],
 			"group": {
 				"kind": "build",
