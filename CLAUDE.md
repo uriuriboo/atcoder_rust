@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 devcontainer は `.devcontainer/Dockerfile` からビルドし、cargo-compete、cargo-member、rustfmt、clippy、graphviz、mold をイメージに入れる。`target/` は名前付きボリュームにマウントする（Windows ホストの bind mount が遅いため）。高速化のための設定とその理由は `docs/build_performance.md` にまとめてあり、環境を変えるときもこの要件を満たすようにする。
 
-`.devcontainer/postCreateCommand.bash` は、ルート `Cargo.toml` が空か無いときに `[workspace]` と `resolver = "3"` だけを書き込み（cargo-member がワークスペースのメンバーを書き込むため。resolver を書かないと edition 2024 でも resolver "1" になり警告が出る）、空の `input.txt` を作成し、ボリュームの `target/` の所有者を変え、ツールが未インストールのとき（CI など Dockerfile を使わない環境）だけ graphviz・mold・`cargo-compete`・`cargo-member` をインストールし、rustfmt と clippy を追加し、`rust-toolchain` = `1.89.0` でツールチェーンを固定する。cargo-compete は固定したツールチェーンではなく最新の stable でビルドするため、`rust-toolchain` を書き込む**前に** cargo-compete をインストールする。`compete.toml` が無いときだけ `cargo compete init atcoder` を実行する（管理している設定の上書き防止）。CI 以外では `cargo compete login atcoder` も実行するが、失敗してもセットアップは止めず、後からタスク "login" でログインし直せる。
+`.devcontainer/postCreateCommand.bash` は、ルート `Cargo.toml` が空か無いときに `[workspace]` と `resolver = "3"` だけを書き込み（cargo-member がワークスペースのメンバーを書き込むため。resolver を書かないと edition 2024 でも resolver "1" になり警告が出る）、空の `input.txt` を作成し、ボリュームの `target/` の所有者を変え、ツールが未インストールのとき（CI など Dockerfile を使わない環境）だけ graphviz・mold・`cargo-compete`・`cargo-member` をインストールし、rustfmt と clippy を追加し、`rust-toolchain` = `1.89.0` でツールチェーンを固定して、1.89.0 にも rustfmt と clippy を入れる（最小構成でインストールされる環境では stable にしか付かないため）。cargo-compete は固定したツールチェーンではなく最新の stable でビルドするため、`rust-toolchain` を書き込む**前に** cargo-compete をインストールする。`compete.toml` が無いときだけ `cargo compete init atcoder` を実行する（管理している設定の上書き防止）。CI 以外では `cargo compete login atcoder` も実行するが、失敗してもセットアップは止めず、後からタスク "login" でログインし直せる。
 
 ## よく使うコマンド
 
@@ -56,4 +56,4 @@ VS Code のタスク（`.vscode/tasks.json` の "build"、"build & test"、"buil
 
 ## CI
 
-`.github/workflows/check_environment.yml` は `postCreateCommand.bash` を実行し、`abc325` を生成して `.github/ciabc325a.rs` を `a.rs` としてコピーし、ビルドとテストを行い（失敗しても続行）、最後に `cargo fmt` を実行する。
+`.github/workflows/check_environment.yml` は `postCreateCommand.bash` を実行し、`abc325` を生成して `.github/ciabc325a.rs` を `a.rs` としてコピーし、ビルドとテストを行い（失敗しても続行）、最後に `cargo fmt` を実行する。`actions-rust-lang/setup-rust-toolchain` は `override: false` にしている（デフォルトの `rustup override` は `rust-toolchain` より優先され、CI の cargo が stable のままになるため）。

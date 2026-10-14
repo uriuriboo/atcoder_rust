@@ -70,6 +70,9 @@ fi
 # install rustup tools
 echo install rust-toolchain
 echo "1.89.0" > rust-toolchain
+# 上の rustfmt と clippy は stable にしか入らない。最小構成でインストールされる環境（CI など）では
+# 1.89.0 に付かず、cargo fmt や clippy が動かないため、固定したツールチェーンにも明示的に入れる
+rustup toolchain install 1.89.0 --component rustfmt --component clippy
 cargo -V
 
 # rustup install 1.89.0

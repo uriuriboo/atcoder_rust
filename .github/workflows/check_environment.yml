@@ -16,11 +16,12 @@ jobs:
       uses: actions-rust-lang/setup-rust-toolchain@v2
       with:
         toolchain: stable  # 使用する Rust のバージョンを指定
+        # デフォルトの rustup override は rust-toolchain より優先され、以降の cargo が 1.89.0 にならないため無効にする
+        override: false
 
     - name: Run postCreateCommand.bash
       run: |
         bash .devcontainer/postCreateCommand.bash
-        rustup install 1.89.0-x86_64-unknown-linux-gnu
     - name: check cargo-compete
       continue-on-error: true
       run: |
