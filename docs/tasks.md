@@ -105,6 +105,8 @@ abc325/stress/a/
 2. `sed` で `<contest>/Cargo.toml` の edition を `2021` から `2024` に書き換える。cargo-compete は `compete.toml` の edition に `2024` を書くと読み込みに失敗する（2015/2018/2021 にしか対応していない）ため、`compete.toml` には `2021` を書いておき、生成後に AtCoder と同じ 2024 にする。
 3. `cargo member include <contest>`：ルートの `Cargo.toml` のワークスペースに、生成したパッケージを追加する。
 
+この 3 つは、それぞれ別のタスク（`rust: ...`）として定義している。単体では実行しないので、`"hide": true` を付けて Task Explorer と「タスクの実行」の一覧に出さないようにしている。
+
 ### login
 
 `cargo compete login atcoder` を実行する。Turnstile の導入後は、ほぼ失敗する。その場合は、ブラウザから `REVEL_SESSION` の Cookie をコピーし、`~/.local/share/cargo-compete/cookies.jsonl` の同じ項目を差し替える。

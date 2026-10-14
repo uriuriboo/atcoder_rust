@@ -136,8 +136,10 @@
 			],
 			"problemMatcher": [],
 		},
+		// "new contest" の中の手順。単体では実行しないので、一覧（Task Explorer・Run Task）に出さない
 		{
 			"label": "rust: cargo compete new",
+			"hide": true,
 			"type": "cargo",
 			"command": "compete",
 			"args": [
@@ -148,6 +150,7 @@
 		{
 			// cargo-compete は edition 2024 を生成できないため、AtCoder に合わせて書き換える
 			"label": "rust: set edition 2024",
+			"hide": true,
 			"type": "shell",
 			"command": "sed",
 			"args": [
@@ -158,6 +161,7 @@
 		},
 		{
 			"label": "rust: cargo member include",
+			"hide": true,
 			"type": "cargo",
 			"command": "member",
 			"args": [

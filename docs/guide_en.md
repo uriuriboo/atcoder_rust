@@ -78,6 +78,11 @@ Almost everything in this environment is done with VS Code tasks. There are two 
 - **Click**: in the **Task Explorer** panel near the bottom of the Explorer, open `atcoder_rust` → `vscode` and click the task name.
 - **Command Palette**: `Ctrl+Shift+P` → "Tasks: Run Task" → choose the task.
 
+Task Explorer has a few more features.
+
+- **Favorites**: hover over a task and press the star button to add it to "Favorites" at the top. Add "build & test" and "submit" so you can press them without searching.
+- **Run the last task again**: `Alt+R` → `T` runs the last task again. The open file is read again on every run, so you can switch to another problem's file before pressing it. Recently run tasks are also listed in "Last Tasks".
+
 Except for "new contest", "visualize graph", and "login", run tasks **with the `.rs` file of the problem you are solving open and active in the editor**.
 
 ## Contest workflow
