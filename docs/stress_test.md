@@ -6,7 +6,7 @@ online-judge-tools（`oj`）の `generate-input` を使う。`oj` はコンテ�
 
 ## 用意するもの
 
-問題ごとに、次の 2 つを Python で書く。
+問題ごとに、次の 2 つを Python で書く。エディタでは補完（Pylance）が効き、Ruff のチェックと保存時の自動フォーマットがかかる。
 
 | ファイル | 役割 |
 | --- | --- |
@@ -87,6 +87,14 @@ print(max(A[i] + A[j] for i in range(N) for j in range(i + 1, N)))
 ### 4. デバッグする
 
 反例は `input.txt` に入っているので、そのまま F5 でデバッグ実行できる。直したら、もう一度「stress: hack」を実行して、ほかの反例がないか確かめる。
+
+`naive.py` や `gen.py` もデバッグできる。
+
+1. 「実行とデバッグ」（`Ctrl+Shift+D`）の上にある一覧で「Debug Python」を選ぶ。一度選べば次からはそのまま。
+2. デバッグしたい `.py` を開いてアクティブにし、ブレークポイントを置いて F5 を押す。
+3. 標準入力は `input.txt` から読む（`input()`・`sys.stdin`・`open(0)` のどれでもよい）。
+
+解答（Rust）のデバッグに戻るときは、一覧で「Debug」を選び直す。
 
 ### 5. これまでの反例で確認する（stress: test）
 

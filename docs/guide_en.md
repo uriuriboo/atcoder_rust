@@ -55,6 +55,7 @@ Open the repository as a Dev Container in VS Code and you get a Rust environment
 ### Editor support
 
 - Code is formatted on save, and clippy warnings show up in the editor.
+- The Python files you write for random testing (`gen.py` and `naive.py`) get completion (Pylance), Ruff checks, and formatting on save too. Choose "Debug Python" in Run and Debug to debug the open `.py` file with F5, reading `input.txt` as standard input.
 
 ## Getting started
 

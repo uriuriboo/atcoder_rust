@@ -55,6 +55,7 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境と�
 ### エディタの補助
 
 - 保存時に自動でフォーマットされ、clippy の警告がエディタに出る。
+- ランダムテストで書く Python（`gen.py`・`naive.py`）も、補完（Pylance）が効き、Ruff のチェックと保存時の自動フォーマットがかかる。デバッグの設定で「Debug Python」を選べば、`input.txt` を入力にして F5 でデバッグできる（[stress_test.md](stress_test.md) の「4. デバッグする」）。
 
 ## はじめかた
 

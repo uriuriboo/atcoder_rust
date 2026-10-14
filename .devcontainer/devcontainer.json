@@ -29,7 +29,10 @@
 				"EditorConfig.EditorConfig",
 				"spmeesseman.vscode-taskexplorer",
 				"tamasfe.even-better-toml",
+				// Python（ランダムテストの gen.py・naive.py）。補完の Pylance とデバッガの debugpy も一緒に入る
 				"ms-python.python",
+				// Python のチェックと自動フォーマット
+				"charliermarsh.ruff",
 				"ms-vscode.cpptools",
 				"lorenzopirro.rust-flash-snippets",
 				"dustypomerleau.rust-syntax"

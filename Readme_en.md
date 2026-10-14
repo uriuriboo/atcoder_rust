@@ -37,7 +37,7 @@ Run a task with a `.rs` file open, and the problem you are solving is detected f
 - **Runs sample tests in parallel**: as many at once as you have CPU cores
 - **Ready to debug**: the build tasks point `launch.json` at the current problem. Put the input in `input.txt` and press F5
 - **Fast builds**: mold speeds up linking, and build output (`target/`) lives on a Docker volume, which has fast I/O even on Windows. Tools are baked into the Docker image, so rebuilding the container is quick too
-- **Editor support**: format on save and clippy checks (only the open contest is checked, so it stays fast as contests pile up). Snippets are available too (`tmplt` for the template, `rep` for a loop, and so on)
+- **Editor support**: format on save and clippy checks (only the open contest is checked, so it stays fast as contests pile up). Snippets are available too (`tmplt` for the template, `rep` for a loop, and so on). The Python you write for random testing gets completion (Pylance) and Ruff checks and formatting too
 - **Graph visualization**: paste a problem's input into `input.txt` to draw trees and weighted graphs. A first line of `N` is read as a tree, and `N M` as M edges
 - **Library**: `library/src/` has copy-and-paste code such as Dijkstra and the sieve of Eratosthenes
 

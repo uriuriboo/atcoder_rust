@@ -46,11 +46,12 @@ VS Code のタスク（`.vscode/tasks.json` の "build"、"build & test"、"buil
 - `compete.toml` は cargo-compete の設定。解答テンプレート（`proconio` と `#[fastout]`）、AtCoder の 2025 年 10 月の言語環境（Rust 1.89.0）に合わせて固定した依存クレート群（edition は cargo-compete の制約で `2021` と書き、生成後に 2024 へ書き換える）、テスト用ツールチェーン `1.89.0`、提出用の `language_id = "6088"` を定義している。AtCoder の環境が更新されたら、[公式の言語一覧](https://img.atcoder.jp/file/language-update/2025-10/language-list.html) に合わせて、これらと `.devcontainer/postCreateCommand.bash`・CI のバージョンをまとめて更新する。
 - バイナリの命名：コンテスト `abc325` の問題 `a` は、ファイル `abc325/src/bin/a.rs`、bin ターゲット `abc325-a`、実行ファイル `target/debug/abc325-a` になる。サンプルテストは `abc325/testcases/a.yml` に置かれる。
 - `.cargo/config.toml` により、全コンテストでリポジトリ直下の `target/` を共有し、リンカに mold を使う。`target/` は devcontainer.json の `mounts` で名前付きボリュームになっている（Windows の bind mount の I/O が遅いため）。rust-analyzer は `.vscode/settings.json` で別の target ディレクトリを使い、タスクの `cargo build` とロックを取り合わない。
+- Python（ランダムテストの gen.py・naive.py）用に、devcontainer.json で拡張機能 `ms-python.python`（Pylance・debugpy を含む）と `charliermarsh.ruff` を入れ、`.vscode/settings.json` で保存時に Ruff でフォーマットする。Python 自体は Dockerfile の pipx の依存で入る。
 - devcontainer はイメージのビルドに `.devcontainer/Dockerfile` を使う（graphviz・mold・cargo-compete・cargo-member をイメージにキャッシュ）。`postCreateCommand.bash` はリポジトリに依存する処理を行い、ツールが無い環境（CI）でだけインストールする。
 - "build & test release" タスクは debug ビルドをせず、`cargo compete t --release` の release ビルドだけを行う。
 - `docs/guide.md`（英語版は `docs/guide_en.md`）に利用者向けの使い方ガイド（できること・便利な点・コンテストの流れ・困ったとき）がある。タスクや機能を変えたら両方を合わせて更新する。
 - `docs/tasks.md` に VS Code のタスクの詳細とツールを乗り換えるときのチェックリスト、`docs/build_performance.md` にビルド高速化の要件がある。環境やツールを変えるときはこれらの要件を満たすようにする。
-- デバッグ：`scripts/change_launch.bash` が `.vscode/launch.json` を書き換え、LLDB の `program` を現在の問題のバイナリに、標準入力を `input.txt` に向ける。"build & test" タスクではこれが自動で行われる。コマンドラインからビルドした場合は `launch.json` を手動で書き換える。
+- デバッグ：`scripts/change_launch.bash` が `.vscode/launch.json` を書き換え、LLDB の `program` を現在の問題のバイナリに、標準入力を `input.txt` に向ける。"build & test" タスクではこれが自動で行われる。コマンドラインからビルドした場合は `launch.json` を手動で書き換える。Python 用の設定 "Debug Python" も書き出し、`scripts/debug_python.py` が `input.txt` をファイル記述子 0 に付け替えてから開いている `.py`（`${file}`）を実行する（debugpy には標準入力を切り替える設定が無いため）。`launch.json` に設定を足すときは `change_launch.bash` にも足す（丸ごと上書きされるため）。
 - グラフ可視化：`scripts/visualize.py` が `input.txt` を読み、Graphviz で `graph.png` を出力する（タスク "visualize graph" / "visualize graph (directed)"）。1行目が `N` なら木、`N M` なら M 本の辺として自動判定し、3列目は重みとして扱う。標準ライブラリのみで、`dot` コマンドは Dockerfile（CI では `postCreateCommand.bash`）で apt から入れる。
 - `library/src/*.rs` は単体のスニペット集（ダイクストラ、BFS/DFS、エラトステネスの篩、二部グラフ判定など）で、それぞれコピペ用に `main` を含む完全なプログラムとして書かれている。`library/src/lib.rs` に組み込まれたモジュールでは**ない**。エディタ用スニペット（`tmplt`、`rep`、`bins` など）は `.vscode/rust.code-snippets` にある。
 

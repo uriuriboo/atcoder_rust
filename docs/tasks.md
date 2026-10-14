@@ -32,6 +32,7 @@ build、test、submit の各スクリプトは、最初に次の処理を行う�
    - LLDB の `program` を `target/debug/<contest>-<problem>` に向ける。
    - 標準入力（`stdio`）を `input.txt` に向ける。
    - これで F5 を押すと、`input.txt` を入力として今の問題をデバッグできる。
+   - Python（gen.py・naive.py）用の設定「Debug Python」も一緒に書き出す。debugpy には標準入力を切り替える設定が無いため、`scripts/debug_python.py` が `input.txt` をファイル記述子 0 に付け替えてから、開いている `.py`（`${file}`）を実行する。
 4. **ビルド**（`build`）
    - `cargo build --bin <contest>-<problem>` で、開いている問題だけを debug ビルドする。
    - 成果物は、`.cargo/config.toml` の設定により、リポジトリ直下の `target/` に置かれる。

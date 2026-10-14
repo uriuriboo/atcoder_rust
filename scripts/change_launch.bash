@@ -27,6 +27,17 @@ echo -e \
             \"stdio\": [\n\
                 \"/workspaces/atcoder_rust/input.txt\"\n\
             ],\n\
+        },\n\
+        // 開いている Python（gen.py・naive.py）を、input.txt を標準入力にしてデバッグする\n\
+        {\n\
+            \"type\": \"debugpy\",\n\
+            \"request\": \"launch\",\n\
+            \"name\": \"Debug Python\",\n\
+            \"program\": \"/workspaces/atcoder_rust/scripts/debug_python.py\",\n\
+            \"args\": [\n\
+                \"\${file}\"\n\
+            ],\n\
+            \"console\": \"integratedTerminal\",\n\
         }\n\
     ]\n\
 }"\

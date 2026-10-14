@@ -5,6 +5,11 @@
         "editor.formatOnType": true,
         "editor.defaultFormatter": "rust-lang.rust-analyzer",
     },
+    // Python（gen.py・naive.py）は保存時に Ruff でフォーマットする
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+    },
     "rust-analyzer.check.command": "clippy",
     // 保存時のチェックを開いているパッケージだけにする（コンテストが増えても遅くならない）
     "rust-analyzer.check.workspace": false,
