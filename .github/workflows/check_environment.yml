@@ -3,6 +3,12 @@ name: Check Environment
 on:
   push:
     branches: '**'
+    # ドキュメントだけの変更では環境に影響しないため動かさない（ほかのファイルも変わっていれば動く）
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'img/**'
+      - 'LICENCE'
 
 jobs:
   run_post_create_command:

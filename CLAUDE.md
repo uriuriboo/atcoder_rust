@@ -56,4 +56,4 @@ VS Code のタスク（`.vscode/tasks.json` の "build"、"build & test"、"buil
 
 ## CI
 
-`.github/workflows/check_environment.yml` は `postCreateCommand.bash` を実行し、`abc325` を生成して `.github/ciabc325a.rs` を `a.rs` としてコピーし、ビルドとテストを行い（失敗しても続行）、最後に `cargo fmt` を実行する。`actions-rust-lang/setup-rust-toolchain` は `override: false` にしている（デフォルトの `rustup override` は `rust-toolchain` より優先され、CI の cargo が stable のままになるため）。
+`.github/workflows/check_environment.yml` は `postCreateCommand.bash` を実行し、`abc325` を生成して `.github/ciabc325a.rs` を `a.rs` としてコピーし、ビルドとテストを行い（失敗しても続行）、最後に `cargo fmt` を実行する。ドキュメント（`*.md`・`docs/`・`img/`・`LICENCE`）だけを変更した push では動かない（`paths-ignore`）。`actions-rust-lang/setup-rust-toolchain` は `override: false` にしている（デフォルトの `rustup override` は `rust-toolchain` より優先され、CI の cargo が stable のままになるため）。
