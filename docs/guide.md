@@ -75,7 +75,7 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境と�
 
 この環境の操作は、ほぼすべて VS Code のタスクで行う。実行のしかたは 2 通り。
 
-- **クリック**：エクスプローラーの下にある **TASK RUNNER** パネルから、タスク名をクリックする。
+- **クリック**：エクスプローラーの下のほうにある **Task Explorer** パネルで、`atcoder_rust` → `vscode` を開き、タスク名をクリックする。
 - **コマンドパレット**：`Ctrl+Shift+P` →「タスク: タスクの実行」（Tasks: Run Task）→ タスクを選ぶ。
 
 「new contest」「visualize graph」「login」以外のタスクは、**解いている問題の `.rs` ファイルをエディタで開いてアクティブにした状態**で実行する。

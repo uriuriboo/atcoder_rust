@@ -9,5 +9,18 @@
     // 保存時のチェックを開いているパッケージだけにする（コンテストが増えても遅くならない）
     "rust-analyzer.check.workspace": false,
     // タスクの cargo build と target/ のロックを取り合わないよう、別のディレクトリを使う
-    "rust-analyzer.cargo.targetDir": true
+    "rust-analyzer.cargo.targetDir": true,
+    // Task Explorer：クリックでタスクを実行する（既定の Open だと tasks.json が開き、${file} が tasks.json になる）
+    "taskexplorer.taskButtons.clickAction": "Execute",
+    // tasks.json のタスクだけを表示する（scripts/ の .py や .bash を引数なしで実行できないようにする）
+    "taskexplorer.enabledTasks": {
+        "bash": false,
+        "batch": false,
+        "eslint": false,
+        "npm": false,
+        "powershell": false,
+        "python": false,
+        "tsc": false,
+        "workspace": true
+    }
 }

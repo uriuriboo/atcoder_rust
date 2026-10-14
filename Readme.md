@@ -61,9 +61,9 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境に�
 
 #### クリックでビルドとテスト
 
-テストしたい.rsファイルをvscodeで表示した状態で右下のTASKRUNNERのbuild & testをクリック
+テストしたい.rsファイルをvscodeで表示した状態で、エクスプローラーのTask Explorerにあるbuild & testをクリック
 
-![Alt text](./img/img.png)
+![Alt text](./img/image.png)
 
 ### 提出
 
@@ -75,7 +75,7 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境に�
 
 #### クリックで提出
 
-上の写真で同様に提出したい.rsファイルをvscodeで表示した状態で右下のTASKRUNNERのsubmitをクリックしてもできます
+上の写真で同様に提出したい.rsファイルをvscodeで表示した状態でTask Explorerのsubmitをクリックしてもできます
 
 ### デバッグ
 

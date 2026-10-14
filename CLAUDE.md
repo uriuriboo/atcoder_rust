@@ -35,7 +35,7 @@ cargo compete submit a
 ./scripts/submit.bash 325 a       # 提出
 ```
 
-普段の操作はタスクランナー（`.vscode/tasks.json`）から行う前提で、コマンドライン用のスクリプトも含めてすべて `scripts/` にまとめてある。`scripts/test.bash` は online-judge-tools（`oj`）でテストするための、手動実行用のスクリプト。cargo-compete の流れとは別物。`oj` はセットアップで pipx から `/usr/local/bin` に入れる（Debian では pip で直接入れられないため）。
+普段の操作は拡張機能 Task Explorer（`spmeesseman.vscode-taskexplorer`）のパネルからタスク（`.vscode/tasks.json`）を実行する前提。`.vscode/settings.json` でクリック時の動作を `Execute` にし（既定の `Open` だと tasks.json が開いてアクティブになり、`${file}` が tasks.json になる）、tasks.json のタスクだけを表示するようにしている。タスクが呼ぶスクリプトは、コマンドライン用のスクリプトも含めてすべて `scripts/` にまとめてある。`scripts/test.bash` は online-judge-tools（`oj`）でテストするための、手動実行用のスクリプト。cargo-compete の流れとは別物。`oj` はセットアップで pipx から `/usr/local/bin` に入れる（Debian では pip で直接入れられないため）。
 
 ランダムテスト：タスク "stress: init"・"stress: hack"・"stress: test" が `scripts/stress.py` を呼ぶ。`<contest>/stress/<problem>/` に入力生成の `gen.py` と愚直解の `naive.py` を置き、`oj generate-input --hack-actual/--hack-expected` で解答と愚直解の出力が食い違う反例を探す。反例は同じディレクトリの `test/hack-XXX.{in,out}` に保存し、`input.txt` にもコピーする。gen.py・naive.py を開いた状態でも問題を判定できるよう、パスの 4 番目の要素が `stress` のときは 5 番目を問題とみなす。
 

@@ -75,7 +75,7 @@ Open the repository as a Dev Container in VS Code and you get a Rust environment
 
 Almost everything in this environment is done with VS Code tasks. There are two ways to run them.
 
-- **Click**: click the task name in the **TASK RUNNER** panel below the Explorer.
+- **Click**: in the **Task Explorer** panel near the bottom of the Explorer, open `atcoder_rust` → `vscode` and click the task name.
 - **Command Palette**: `Ctrl+Shift+P` → "Tasks: Run Task" → choose the task.
 
 Except for "new contest", "visualize graph", and "login", run tasks **with the `.rs` file of the problem you are solving open and active in the editor**.

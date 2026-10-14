@@ -27,7 +27,7 @@
 			"extensions": [
 				// "rust-lang.rust",
 				"EditorConfig.EditorConfig",
-				"SanaAjani.taskrunnercode",
+				"spmeesseman.vscode-taskexplorer",
 				"tamasfe.even-better-toml",
 				"ms-python.python",
 				"ms-vscode.cpptools",

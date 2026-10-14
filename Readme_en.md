@@ -59,9 +59,9 @@ Run a task with a `.rs` file open, and the problem you are solving is detected f
 
 #### Click to build and test
 
-With the .rs file you want to test in vscode, click build & test in TASKRUNNER in the lower right corner
+With the .rs file you want to test open in vscode, click build & test in Task Explorer in the Explorer
 
-![Alt text](./img/img.png)
+![Alt text](./img/image.png)
 
 ### Submit
 
@@ -73,7 +73,7 @@ With the .rs file you want to test in vscode, click build & test in TASKRUNNER i
 
 #### Click to submit
 
-You can also click submit in TASKRUNNER in the lower right corner with the .rs file you want to submit similarly in the picture above in vscode.
+You can also click submit in Task Explorer (see the picture above) with the .rs file you want to submit open in vscode.
 
 ### Debugging
 
