@@ -10,8 +10,11 @@ if [ -f "rust-toolchain" ]; then
 fi
 
 # cargo-memberで書き込むため
+# resolver を書かないと、edition 2024 のメンバーがあっても古い resolver "1" になり警告が出る
 echo make Cargo.toml
-touch Cargo.toml
+if [ ! -s Cargo.toml ]; then
+    printf '[workspace]\nresolver = "3"\n' > Cargo.toml
+fi
 sudo chmod a+w Cargo.toml
 
 # デバッグ実行の標準入力（launch.json）とグラフ可視化で使う。gitignore 対象
@@ -35,10 +38,11 @@ fi
 # ランダムテスト（scripts/stress.py）用の online-judge-tools（oj）
 # devcontainer では Dockerfile でインストール済み。Debian では pip で直接入れられない（PEP 668）ため pipx を使い、
 # 全ユーザーから使えるよう /usr/local/bin に置く
+# GitHub のランナーは /etc/environment で PIPX_BIN_DIR を設定しており、`sudo VAR=...` では上書きされるため env を挟む
 if ! command -v oj > /dev/null; then
     echo install online-judge-tools
     command -v pipx > /dev/null || { sudo apt-get update; sudo apt-get install -y pipx; }
-    sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install online-judge-tools
+    sudo env PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install online-judge-tools
 fi
 
 # install cargo tools

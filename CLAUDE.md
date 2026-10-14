@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 devcontainer は `.devcontainer/Dockerfile` からビルドし、cargo-compete、cargo-member、rustfmt、clippy、graphviz、mold をイメージに入れる。`target/` は名前付きボリュームにマウントする（Windows ホストの bind mount が遅いため）。高速化のための設定とその理由は `docs/build_performance.md` にまとめてあり、環境を変えるときもこの要件を満たすようにする。
 
-`.devcontainer/postCreateCommand.bash` は、空のルート `Cargo.toml` を作成し（cargo-member がワークスペースのメンバーを書き込むため）、空の `input.txt` を作成し、ボリュームの `target/` の所有者を変え、ツールが未インストールのとき（CI など Dockerfile を使わない環境）だけ graphviz・mold・`cargo-compete`・`cargo-member` をインストールし、rustfmt と clippy を追加し、`rust-toolchain` = `1.89.0` でツールチェーンを固定する。cargo-compete は固定したツールチェーンではなく最新の stable でビルドするため、`rust-toolchain` を書き込む**前に** cargo-compete をインストールする。`compete.toml` が無いときだけ `cargo compete init atcoder` を実行する（管理している設定の上書き防止）。CI 以外では `cargo compete login atcoder` も実行するが、失敗してもセットアップは止めず、後からタスク "login" でログインし直せる。
+`.devcontainer/postCreateCommand.bash` は、ルート `Cargo.toml` が空か無いときに `[workspace]` と `resolver = "3"` だけを書き込み（cargo-member がワークスペースのメンバーを書き込むため。resolver を書かないと edition 2024 でも resolver "1" になり警告が出る）、空の `input.txt` を作成し、ボリュームの `target/` の所有者を変え、ツールが未インストールのとき（CI など Dockerfile を使わない環境）だけ graphviz・mold・`cargo-compete`・`cargo-member` をインストールし、rustfmt と clippy を追加し、`rust-toolchain` = `1.89.0` でツールチェーンを固定する。cargo-compete は固定したツールチェーンではなく最新の stable でビルドするため、`rust-toolchain` を書き込む**前に** cargo-compete をインストールする。`compete.toml` が無いときだけ `cargo compete init atcoder` を実行する（管理している設定の上書き防止）。CI 以外では `cargo compete login atcoder` も実行するが、失敗してもセットアップは止めず、後からタスク "login" でログインし直せる。
 
 ## よく使うコマンド
 
