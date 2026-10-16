@@ -7,7 +7,7 @@ See the [user guide](docs/guide_en.md) for what this environment can do, why it 
 
 ## What this environment provides
 
-Open the repository as a Dev Container in VS Code and you get a Rust environment that matches AtCoder's judge. Day-to-day operations are run from the task runner.
+Open the repository as a Dev Container in VS Code and you get a Rust environment that matches AtCoder's judge. Day-to-day operations are run from the task buttons in the status bar at the bottom of the window (the [Tasks](https://marketplace.visualstudio.com/items?itemName=actboy168.tasks) extension).
 
 ### What gets installed
 
@@ -19,7 +19,7 @@ Open the repository as a Dev Container in VS Code and you get a Rust environment
 
 ### Tasks
 
-Run a task with a `.rs` file open, and the problem you are solving is detected from the file's location (for example `abc325/src/bin/a.rs`). You can also run tasks from `Ctrl+Shift+P` → "Tasks: Run Task".
+Run a task with a `.rs` file open, and the problem you are solving is detected from the file's location (for example `abc325/src/bin/a.rs`). Buttons such as test and submit appear only while a solution `.rs` file is open. Up to six buttons are shown; choose the rest from "その他" (More) in the status bar. You can also run tasks from `Ctrl+Shift+P` → "Tasks: Run Task".
 
 | Task | What it does |
 | --- | --- |
@@ -60,9 +60,7 @@ Run a task with a `.rs` file open, and the problem you are solving is detected f
 
 #### Click to build and test
 
-With the .rs file you want to test open in vscode, click build & test in Task Explorer in the Explorer
-
-![Alt text](./img/image.png)
+With the .rs file you want to test open in vscode, click `test` (build & test) in the status bar at the bottom of the window
 
 ### Submit
 
@@ -74,7 +72,7 @@ With the .rs file you want to test open in vscode, click build & test in Task Ex
 
 #### Click to submit
 
-You can also click submit in Task Explorer (see the picture above) with the .rs file you want to submit open in vscode.
+You can also click `submit` in the status bar with the .rs file you want to submit open in vscode.
 
 ### Debugging
 

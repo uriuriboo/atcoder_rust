@@ -22,7 +22,7 @@ jobs:
       uses: actions-rust-lang/setup-rust-toolchain@v2
       with:
         toolchain: stable  # 使用する Rust のバージョンを指定
-        # デフォルトの rustup override は rust-toolchain より優先され、以降の cargo が 1.89.0 にならないため無効にする
+        # デフォルトの rustup override は rust-toolchain.toml より優先され、以降の cargo が 1.89.0 にならないため無効にする
         override: false
 
     - name: Run postCreateCommand.bash
@@ -30,6 +30,9 @@ jobs:
         bash .devcontainer/postCreateCommand.bash
     - name: check python for stress test
       run: python3.15 --version
+    # oj は依存（setuptools など）が欠けていてもインストールは成功するので、起動できるかを確かめる
+    - name: check online-judge-tools for stress test
+      run: oj --version
     - name: check cargo-compete
       continue-on-error: true
       run: |

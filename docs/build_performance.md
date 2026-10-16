@@ -68,6 +68,6 @@
 - `postCreateCommand.bash` では、コマンドが見つからないときだけインストールする。CI は Dockerfile を使わないので、このスクリプトがインストールを行う。
 
 **注意**
-- cargo-compete は最新の stable でビルドする必要がある。Dockerfile にはリポジトリの `rust-toolchain` が無いので、stable でビルドされる。
+- cargo-compete は最新の stable でビルドする必要がある。Dockerfile にはリポジトリの `rust-toolchain.toml` が無いので、stable でビルドされる。
 - CI では、`actions-rust-lang/setup-rust-toolchain` のキャッシュ（デフォルトで有効）によって、`~/.cargo` と `target/` がキャッシュされる。
-- CI では、`actions-rust-lang/setup-rust-toolchain` の `override` を `false` にする。デフォルトの `rustup override set stable` はディレクトリ単位で `rust-toolchain` より優先されるため、CI でのビルドや `cargo fmt` が 1.89.0 ではなく stable で動いてしまう。
+- CI では、`actions-rust-lang/setup-rust-toolchain` の `override` を `false` にする。デフォルトの `rustup override set stable` はディレクトリ単位で `rust-toolchain.toml` より優先されるため、CI でのビルドや `cargo fmt` が 1.89.0 ではなく stable で動いてしまう。

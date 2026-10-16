@@ -9,7 +9,7 @@
 
 ## この環境でできること
 
-VS Code で Dev Container として開くだけで、AtCoder の提出環境に合わせた Rust の開発環境ができます。普段の操作はタスクランナーから行います。
+VS Code で Dev Container として開くだけで、AtCoder の提出環境に合わせた Rust の開発環境ができます。普段の操作は、画面下のステータスバーに並ぶタスクのボタン（拡張機能 [Tasks](https://marketplace.visualstudio.com/items?itemName=actboy168.tasks)）から行います。
 
 ### 用意されるもの
 
@@ -21,7 +21,7 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境に�
 
 ### タスクランナーでできること
 
-`.rs` ファイルを開いた状態で実行すると、ファイルの場所（`abc325/src/bin/a.rs` など）から解いている問題を自動で判定します。タスクは `Ctrl+Shift+P` →「タスク: タスクの実行」からも実行できます。
+`.rs` ファイルを開いた状態で実行すると、ファイルの場所（`abc325/src/bin/a.rs` など）から解いている問題を自動で判定します。test や submit などのボタンは、解答の `.rs` を開いているときだけ表示されます。ボタンは 6 個まで並び、残りはステータスバーの「その他」から選べます。タスクは `Ctrl+Shift+P` →「タスク: タスクの実行」からも実行できます。
 
 | タスク | 内容 |
 | --- | --- |
@@ -62,9 +62,7 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境に�
 
 #### クリックでビルドとテスト
 
-テストしたい.rsファイルをvscodeで表示した状態で、エクスプローラーのTask Explorerにあるbuild & testをクリック
-
-![Alt text](./img/image.png)
+テストしたい.rsファイルをvscodeで表示した状態で、画面下のステータスバーの `test`（build & test）をクリック
 
 ### 提出
 
@@ -76,7 +74,7 @@ VS Code で Dev Container として開くだけで、AtCoder の提出環境に�
 
 #### クリックで提出
 
-上の写真で同様に提出したい.rsファイルをvscodeで表示した状態でTask Explorerのsubmitをクリックしてもできます
+提出したい.rsファイルをvscodeで表示した状態で、ステータスバーの `submit` をクリックしてもできます
 
 ### デバッグ
 

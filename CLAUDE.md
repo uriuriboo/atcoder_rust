@@ -10,9 +10,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## セットアップ（devcontainer）
 
-devcontainer は `.devcontainer/Dockerfile` からビルドし、cargo-compete、cargo-member、rustfmt、clippy、graphviz、mold、online-judge-tools、uv と Python 3.15 をイメージに入れる。`target/` は名前付きボリュームにマウントする（Windows ホストの bind mount が遅いため）。高速化のための設定とその理由は `docs/build_performance.md` にまとめてあり、環境を変えるときもこの要件を満たすようにする。
+devcontainer は `.devcontainer/Dockerfile` からビルドし（ベースイメージは `mcr.microsoft.com/devcontainers/rust:2-1-trixie`。セキュリティ修正はサポート中の最新の系統にしか入らないので、イメージ定義のメジャーバージョンが上がったら合わせる）、cargo-compete、cargo-member、rustfmt、clippy、graphviz、mold、online-judge-tools、uv と Python 3.15 をイメージに入れる。uv は公式イメージ `ghcr.io/astral-sh/uv` からバイナリをコピーし（バージョンは固定。上げるときは `postCreateCommand.bash` のインストーラーの URL も合わせる）、online-judge-tools は `uv tool install` で入れる。`target/` は名前付きボリュームにマウントする（Windows ホストの bind mount が遅いため）。高速化のための設定とその理由は `docs/build_performance.md` にまとめてあり、環境を変えるときもこの要件を満たすようにする。
 
-`.devcontainer/postCreateCommand.bash` は、ルート `Cargo.toml` が空か無いときに `[workspace]` と `resolver = "3"` だけを書き込み（cargo-member がワークスペースのメンバーを書き込むため。resolver を書かないと edition 2024 でも resolver "1" になり警告が出る）、空の `input.txt` を作成し、ボリュームの `target/` の所有者を変え、ツールが未インストールのとき（CI など Dockerfile を使わない環境）だけ graphviz・mold・`cargo-compete`・`cargo-member` をインストールし、rustfmt と clippy を追加し、`rust-toolchain` = `1.89.0` でツールチェーンを固定して、1.89.0 にも rustfmt と clippy を入れる（最小構成でインストールされる環境では stable にしか付かないため）。cargo-compete は固定したツールチェーンではなく最新の stable でビルドするため、`rust-toolchain` を書き込む**前に** cargo-compete をインストールする。`compete.toml` が無いときだけ `cargo compete init atcoder` を実行する（管理している設定の上書き防止）。CI 以外では `cargo compete login atcoder` も実行するが、失敗してもセットアップは止めず、後からタスク "login" でログインし直せる。
+`.devcontainer/postCreateCommand.bash` は、ルート `Cargo.toml` が空か無いときに `[workspace]` と `resolver = "3"` だけを書き込み（cargo-member がワークスペースのメンバーを書き込むため。resolver を書かないと edition 2024 でも resolver "1" になり警告が出る）、空の `input.txt` を作成し、ボリュームの `target/` の所有者を変え、ツールが未インストールのとき（CI など Dockerfile を使わない環境）だけ graphviz・mold・`cargo-compete`・`cargo-member` をインストールし、rustfmt と clippy を追加し、`rust-toolchain.toml`（`channel = "1.89.0"`）でツールチェーンを固定して、1.89.0 にも rustfmt と clippy を入れる（最小構成でインストールされる環境では stable にしか付かないため）。cargo-compete は固定したツールチェーンではなく最新の stable でビルドするため、`rust-toolchain.toml` を書き込む**前に** cargo-compete をインストールする。`compete.toml` が無いときだけ `cargo compete init atcoder` を実行する（管理している設定の上書き防止）。CI 以外では `cargo compete login atcoder` も実行するが、失敗してもセットアップは止めず、後からタスク "login" でログインし直せる。
 
 ## よく使うコマンド
 
@@ -35,7 +35,7 @@ cargo compete submit a
 ./scripts/submit.bash 325 a       # 提出
 ```
 
-普段の操作は拡張機能 Task Explorer（`spmeesseman.vscode-taskexplorer`）のパネルからタスク（`.vscode/tasks.json`）を実行する前提。`.vscode/settings.json` でクリック時の動作を `Execute` にし（既定の `Open` だと tasks.json が開いてアクティブになり、`${file}` が tasks.json になる）、tasks.json のタスクだけを表示するようにしている。タスクが呼ぶスクリプトは、コマンドライン用のスクリプトも含めてすべて `scripts/` にまとめてある。`scripts/test.bash` は online-judge-tools（`oj`）でテストするための、手動実行用のスクリプト。cargo-compete の流れとは別物。`oj` はセットアップで pipx から `/usr/local/bin` に入れる（Debian では pip で直接入れられないため）。
+普段の操作は、拡張機能 Tasks（`actboy168.tasks`）がステータスバーに出すボタンからタスク（`.vscode/tasks.json`）を実行する前提（以前の Task Explorer は更新が止まり、起動時に固まる報告があるため置き換えた）。ボタンの設定は各タスクの `options.statusbar`（`label`・`detail`・`filePattern`）で、`.vscode/settings.json` の `tasks.statusbar.default.hide` で既定を非表示にし、`hide: false` にしたタスクだけを出す（rust-analyzer が自動で作る cargo のタスクなどは出さない）。`filePattern` は開いているファイルの絶対パスに対する正規表現で、build・test・submit 系は `/src/bin/`、stress 系は `/(src/bin|stress)/` のときだけ出す。前から `tasks.statusbar.limit`（6）個を並べ、残りは「その他」にまとめるので、よく使うタスクを tasks.json の前のほうに置く。クリックすると開いているエディタのファイルを `${file}` にして実行する。タスクを足したら `options.statusbar` も付ける。タスクが呼ぶスクリプトは、コマンドライン用のスクリプトも含めてすべて `scripts/` にまとめてある。`scripts/test.bash` は online-judge-tools（`oj`）でテストするための、手動実行用のスクリプト。cargo-compete の流れとは別物。`oj` はセットアップで `uv tool install` から `/usr/local/bin` に入れる（Debian では pip で直接入れられないため。依存する lxml などのビルド済みパッケージがあるよう Python 3.13 で動かす）。oj は distutils を使うので、`--with setuptools` で setuptools を一緒に入れる（Python 3.12 以降は distutils が無く、無いと `ModuleNotFoundError: No module named 'distutils'` で起動しない。インストール自体は成功するので気づきにくい）。
 
 ランダムテスト：タスク "stress: init"・"stress: hack"・"stress: test" が `scripts/stress.py` を呼ぶ。`<contest>/stress/<problem>/` に入力生成の `gen.py` と愚直解の `naive.py` を置き、`oj generate-input --hack-actual/--hack-expected` で解答と愚直解の出力が食い違う反例を探す。反例は同じディレクトリの `test/hack-XXX.{in,out}` に保存し、`input.txt` にもコピーする。gen.py・naive.py を開いた状態でも問題を判定できるよう、パスの 4 番目の要素が `stress` のときは 5 番目を問題とみなす。
 
@@ -57,4 +57,4 @@ VS Code のタスク（`.vscode/tasks.json` の "build"、"build & test"、"buil
 
 ## CI
 
-`.github/workflows/check_environment.yml` は `postCreateCommand.bash` を実行し、`abc325` を生成して `.github/ciabc325a.rs` を `a.rs` としてコピーし、ビルドとテストを行い（失敗しても続行）、最後に `cargo fmt` を実行する。ドキュメント（`*.md`・`docs/`・`img/`・`LICENCE`）だけを変更した push では動かない（`paths-ignore`）。`actions-rust-lang/setup-rust-toolchain` は `override: false` にしている（デフォルトの `rustup override` は `rust-toolchain` より優先され、CI の cargo が stable のままになるため）。
+`.github/workflows/check_environment.yml` は `postCreateCommand.bash` を実行し、Python 3.15 と `oj` が起動できるかを確かめ、`abc325` を生成して `.github/ciabc325a.rs` を `a.rs` としてコピーし、ビルドとテストを行い（失敗しても続行）、最後に `cargo fmt` を実行する。ドキュメント（`*.md`・`docs/`・`img/`・`LICENCE`）だけを変更した push では動かない（`paths-ignore`）。`actions-rust-lang/setup-rust-toolchain` は `override: false` にしている（デフォルトの `rustup override` は `rust-toolchain.toml` より優先され、CI の cargo が stable のままになるため）。

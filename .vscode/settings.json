@@ -17,17 +17,10 @@
     "rust-analyzer.check.workspace": false,
     // タスクの cargo build と target/ のロックを取り合わないよう、別のディレクトリを使う
     "rust-analyzer.cargo.targetDir": true,
-    // Task Explorer：クリックでタスクを実行する（既定の Open だと tasks.json が開き、${file} が tasks.json になる）
-    "taskexplorer.taskButtons.clickAction": "Execute",
-    // tasks.json のタスクだけを表示する（scripts/ の .py や .bash を引数なしで実行できないようにする）
-    "taskexplorer.enabledTasks": {
-        "bash": false,
-        "batch": false,
-        "eslint": false,
-        "npm": false,
-        "powershell": false,
-        "python": false,
-        "tsc": false,
-        "workspace": true
-    }
+    // ステータスバーのタスクのボタン（拡張機能 Tasks）
+    // tasks.json で options.statusbar.hide を false にしたタスクだけを出す（rust-analyzer が自動で作る cargo のタスクなどは出さない）
+    "tasks.statusbar.default.hide": true,
+    // ボタンは前から 6 個まで並べ、残りは「その他」から選ぶ
+    "tasks.statusbar.limit": 6,
+    "tasks.statusbar.select.label": "$(list-unordered) その他"
 }

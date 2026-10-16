@@ -76,13 +76,11 @@ Open the repository as a Dev Container in VS Code and you get a Rust environment
 
 Almost everything in this environment is done with VS Code tasks. There are two ways to run them.
 
-- **Click**: in the **Task Explorer** panel near the bottom of the Explorer, open `atcoder_rust` → `vscode` and click the task name.
+- **Click**: click a button in the status bar at the bottom of the window (the Tasks extension). Up to six buttons are shown; choose the rest from "その他" (More). The buttons change with the open file.
+  - With a solution `.rs` file (`<contest>/src/bin/`) open: `test` (build & test), `submit`, `release` (build & test release), `build`, `stress hack`, and `new contest`. stress init, stress test, graph, digraph (visualize graph), and login are under "その他".
+  - With a random-test `gen.py` or `naive.py` open: the stress tasks, `new contest`, `graph`, and `digraph`. login is under "その他".
+  - Otherwise: `new contest`, `graph`, `digraph`, and `login`.
 - **Command Palette**: `Ctrl+Shift+P` → "Tasks: Run Task" → choose the task.
-
-Task Explorer has a few more features.
-
-- **Favorites**: hover over a task and press the star button to add it to "Favorites" at the top. Add "build & test" and "submit" so you can press them without searching.
-- **Run the last task again**: `Alt+R` → `T` runs the last task again. The open file is read again on every run, so you can switch to another problem's file before pressing it. Recently run tasks are also listed in "Last Tasks".
 
 Except for "new contest", "visualize graph", and "login", run tasks **with the `.rs` file of the problem you are solving open and active in the editor**.
 

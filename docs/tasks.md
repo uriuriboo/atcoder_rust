@@ -85,7 +85,7 @@ abc325/stress/a/
    - 反例は `input.txt` にもコピーするので、そのまま F5 でデバッグできる。
 3. **stress: test**：共通処理の 1〜4 のあと、`oj test` で `test/` のケースをすべて実行する。直したあとに、これまでの反例で回帰テストするのに使う。
 
-`gen.py` の値は小さくしておくと、反例が見つかったときに手で追いやすい。`oj` は `postCreateCommand.bash`（devcontainer では Dockerfile）で pipx から入れている。
+`gen.py` の値は小さくしておくと、反例が見つかったときに手で追いやすい。`oj` は `postCreateCommand.bash`（devcontainer では Dockerfile）で、uv のツールとして（`uv tool install`）入れている。`oj` は distutils を使うため、Python 3.12 以降では setuptools を一緒に入れないと起動しない（`--with setuptools`）。
 
 ### visualize graph / visualize graph (directed)
 
@@ -106,7 +106,7 @@ abc325/stress/a/
 2. `sed` で `<contest>/Cargo.toml` の edition を `2021` から `2024` に書き換える。cargo-compete は `compete.toml` の edition に `2024` を書くと読み込みに失敗する（2015/2018/2021 にしか対応していない）ため、`compete.toml` には `2021` を書いておき、生成後に AtCoder と同じ 2024 にする。
 3. `cargo member include <contest>`：ルートの `Cargo.toml` のワークスペースに、生成したパッケージを追加する。
 
-この 3 つは、それぞれ別のタスク（`rust: ...`）として定義している。単体では実行しないので、`"hide": true` を付けて Task Explorer と「タスクの実行」の一覧に出さないようにしている。
+この 3 つは、それぞれ別のタスク（`rust: ...`）として定義している。単体では実行しないので、`"hide": true` を付けてステータスバーのボタンと「タスクの実行」の一覧に出さないようにしている。
 
 ### login
 

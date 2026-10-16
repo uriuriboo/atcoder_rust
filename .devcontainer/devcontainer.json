@@ -25,17 +25,22 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				// "rust-lang.rust",
+				// Rust の補完（rust-analyzer）とデバッガ（CodeLLDB）は、ベースイメージの Rust の feature が入れる
+				// （以前の拡張機能 rust-lang.rust は非推奨になり、rust-analyzer に置き換わった）
 				"EditorConfig.EditorConfig",
-				"spmeesseman.vscode-taskexplorer",
-				"tamasfe.even-better-toml",
+				// タスク（.vscode/tasks.json）をステータスバーのボタンからクリックで実行する
+				"actboy168.tasks",
+				// TOML（Cargo.toml・compete.toml）の補完とチェック。保守が止まった Even Better TOML の代わりに使う
+				// （Even Better TOML はベースイメージの Rust の feature が入れるので、- を付けて入れないようにする）
+				"tombi-toml.tombi",
+				"-tamasfe.even-better-toml",
 				// Python（ランダムテストの gen.py・naive.py）。補完の Pylance とデバッガの debugpy も一緒に入る
 				"ms-python.python",
 				// Python のチェックと自動フォーマット
 				"charliermarsh.ruff",
-				"ms-vscode.cpptools",
-				"lorenzopirro.rust-flash-snippets",
-				"dustypomerleau.rust-syntax"
+				// C/C++ 拡張機能は入れない（デバッガは launch.json の CodeLLDB を使う）
+				"lorenzopirro.rust-flash-snippets"
+				// Rust Syntax 拡張機能は入れない（文法は VS Code 本体に取り込まれていて、色分けは rust-analyzer のほうが正確）
 			]
 		}
 	}

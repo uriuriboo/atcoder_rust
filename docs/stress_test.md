@@ -36,7 +36,7 @@ stress のタスクは、ほかのタスク（build & test など）と同じよ
 2. `Ctrl+Shift+P` を押し、「タスク: タスクの実行」（Tasks: Run Task）を選ぶ。
 3. 一覧から実行したいタスク（stress: init など）を選ぶ。
 
-エクスプローラーの Task Explorer パネルからクリックで実行してもよい。
+ステータスバーのボタン（`stress hack` など。ないものは「その他」）からクリックで実行してもよい。
 
 コマンドラインから実行する場合は、devcontainer 内で、モード（`init`・`hack`・`test`）と解答ファイルのパスを渡す。
 
