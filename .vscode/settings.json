@@ -5,5 +5,22 @@
         "editor.formatOnType": true,
         "editor.defaultFormatter": "rust-lang.rust-analyzer",
     },
-    "rust-analyzer.check.command": "clippy"
+    // Python（gen.py・naive.py）は uv で入れた新しい Python で動かすので、補完もそれに合わせる（Dockerfile）
+    "python.defaultInterpreterPath": "/usr/local/bin/python3.15",
+    // Python（gen.py・naive.py）は保存時に Ruff でフォーマットする
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+    },
+    "rust-analyzer.check.command": "clippy",
+    // 保存時のチェックを開いているパッケージだけにする（コンテストが増えても遅くならない）
+    "rust-analyzer.check.workspace": false,
+    // タスクの cargo build と target/ のロックを取り合わないよう、別のディレクトリを使う
+    "rust-analyzer.cargo.targetDir": true,
+    // ステータスバーのタスクのボタン（拡張機能 Tasks）
+    // tasks.json で options.statusbar.hide を false にしたタスクだけを出す（rust-analyzer が自動で作る cargo のタスクなどは出さない）
+    "tasks.statusbar.default.hide": true,
+    // ボタンは前から 6 個まで並べ、残りは「その他」から選ぶ
+    "tasks.statusbar.limit": 6,
+    "tasks.statusbar.select.label": "$(list-unordered) その他"
 }

@@ -1,31 +1,10 @@
 {
+	// タスクは、ステータスバーのボタン（拡張機能 Tasks。options.statusbar で設定）か、Ctrl+Shift+P →「タスク: タスクの実行」から実行する
+	// - filePattern のあるボタンは、問題のファイルを開いているときだけ出る。test・submit などは <contest>/src/bin/*.rs、
+	//   stress 系はそれに加えて stress/ の gen.py・naive.py（scripts/common.py は src/bin のパスから問題を判定するため）
+	// - ボタンは前から 6 個まで並び、残りは「その他」から選ぶ（.vscode/settings.json の tasks.statusbar.limit）
 	"version": "2.0.0",
 	"tasks": [
-		// {
-		// 	"type": "cargo",
-		// 	"command": "build",
-		// 	"problemMatcher": [
-		// 		"$rustc"
-		// 	],
-		// 	"group": "build",
-		// 	"label": "rust: cargo build"
-		// },
-		// {
-		// 	"type": "shell",
-		// 	"command":[ "cd ${workspaceFolder}/abc253/src/bin/ & pwd",
-		// 		//"cargo build & cargo compete t ${fileBasenameNoExtension}",
-		// 	],
-		// 	"group": "build",
-		// 	"label": "rust: cd cargo build"
-		// },
-		// {
-		// 	"type": "shell",
-		// 	"command": [
-		// 		"pwd"
-		// 	],
-		// 	"group": "test",
-		// 	"label": "pwd"
-		// },
 		{
 			"label": "build & test",
 			"type": "shell",
@@ -39,20 +18,14 @@
 				"isDefault": true
 			},
 			"problemMatcher": [],
-		},
-		{
-			"label": "build & test release",
-			"type": "shell",
-			"command": "python3",
-			"args": [
-				"${workspaceFolder}/scripts/test_release.py",
-				"${file}"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(beaker) test",
+					"detail": "開いている問題をビルドして、サンプルでテストする",
+					"filePattern": "/src/bin/"
+				}
+			}
 		},
 		{
 			"label": "submit",
@@ -67,30 +40,84 @@
 				"isDefault": true
 			},
 			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(cloud-upload) submit",
+					"detail": "開いている問題を提出する",
+					"filePattern": "/src/bin/"
+				}
+			}
 		},
 		{
-			"label": "rust: cargo compete new",
-			"type": "cargo",
-			"command": "compete",
+			"label": "build & test release",
+			"type": "shell",
+			"command": "python3",
 			"args": [
-				"new",
-				"${input:contest}"
-			]
+				"${workspaceFolder}/scripts/test_release.py",
+				"${file}"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(rocket) release",
+					"detail": "リリースビルドでテストする（実行時間の確認用）",
+					"filePattern": "/src/bin/"
+				}
+			}
 		},
 		{
-			"label": "rust: cargo member include",
-			"type": "cargo",
-			"command": "member",
+			"label": "build",
+			"type": "shell",
+			"command": "python3",
 			"args": [
-				"include",
-				"${input:contest}"
-			]
+				"${workspaceFolder}/scripts/build.py",
+				"${file}"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(tools) build",
+					"detail": "開いている問題だけをビルドする",
+					"filePattern": "/src/bin/"
+				}
+			}
+		},
+		{
+			"label": "stress: hack",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/stress.py",
+				"hack",
+				"${file}"
+			],
+			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(zap) stress hack",
+					"detail": "ランダムな入力で愚直解と比べ、反例を探す",
+					"filePattern": "/(src/bin|stress)/"
+				}
+			}
 		},
 		{
 			"label": "new contest",
 			"dependsOrder": "sequence",
 			"dependsOn": [
 				"rust: cargo compete new",
+				"rust: set edition 2024",
 				"rust: cargo member include",
 			],
 			"presentation": {
@@ -101,20 +128,141 @@
 				"showReuseMessage": true,
 				"clear": true
 			},
-			"problemMatcher": []
+			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(add) new contest",
+					"detail": "コンテスト ID を入力して、問題とサンプルを取得する"
+				}
+			}
+		},
+		{
+			"label": "stress: init",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/stress.py",
+				"init",
+				"${file}"
+			],
+			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(zap) stress init",
+					"detail": "ランダムテストの gen.py・naive.py の雛形を作る",
+					"filePattern": "/(src/bin|stress)/"
+				}
+			}
+		},
+		{
+			"label": "stress: test",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/stress.py",
+				"test",
+				"${file}"
+			],
+			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(zap) stress test",
+					"detail": "保存した反例（stress/<problem>/test/）でテストする",
+					"filePattern": "/(src/bin|stress)/"
+				}
+			}
+		},
+		{
+			"label": "visualize graph",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/visualize.py",
+				"${workspaceFolder}/input.txt"
+			],
+			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(graph) graph",
+					"detail": "input.txt のグラフを画像にする"
+				}
+			}
+		},
+		{
+			"label": "visualize graph (directed)",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/visualize.py",
+				"${workspaceFolder}/input.txt",
+				"--directed"
+			],
+			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(graph) digraph",
+					"detail": "input.txt のグラフを有向グラフとして画像にする"
+				}
+			}
 		},
 		{
 			"label": "login",
 			"type": "shell",
-			"command": "cargo compate",
+			"command": "cargo compete",
 			"args": [
 				"login",
+				"atcoder",
 			],
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
 			"problemMatcher": [],
+			"options": {
+				"statusbar": {
+					"hide": false,
+					"label": "$(account) login",
+					"detail": "AtCoder にログインする"
+				}
+			}
+		},
+		// "new contest" の中の手順。単体では実行しないので、一覧（タスクの実行・ステータスバー）に出さない
+		{
+			"label": "rust: cargo compete new",
+			"hide": true,
+			"type": "cargo",
+			"command": "compete",
+			"args": [
+				"new",
+				"${input:contest}"
+			]
+		},
+		{
+			// cargo-compete は edition 2024 を生成できないため、AtCoder に合わせて書き換える
+			"label": "rust: set edition 2024",
+			"hide": true,
+			"type": "shell",
+			"command": "sed",
+			"args": [
+				"-i",
+				"s/^edition = \"2021\"$/edition = \"2024\"/",
+				"${input:contest}/Cargo.toml"
+			]
+		},
+		{
+			"label": "rust: cargo member include",
+			"hide": true,
+			"type": "cargo",
+			"command": "member",
+			"args": [
+				"include",
+				"${input:contest}"
+			]
 		},
 	],
 	"inputs": [

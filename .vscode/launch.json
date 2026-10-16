@@ -15,6 +15,18 @@
             "stdio": [
                 "/workspaces/atcoder_rust/input.txt"
             ],
+        },
+        // 開いている Python（gen.py・naive.py）を、input.txt を標準入力にしてデバッグする
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "name": "Debug Python",
+            "python": "/usr/local/bin/python3.15",
+            "program":"/workspaces/atcoder_rust/scripts/debug_python.py",
+            "args": [
+                "${file}"
+            ],
+            "console": "integratedTerminal",
         }
     ]
 }

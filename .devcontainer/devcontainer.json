@@ -2,10 +2,14 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/rust
 {
 	"name": "atcoder-rust",
-	"image": "mcr.microsoft.com/devcontainers/rust:1-bullseye",
-	// "build": {
-	// 	"dockerfile": "Dockerfile"
-	// },
+	// cargo-compete などのビルドをイメージのレイヤーにキャッシュするため Dockerfile を使う
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	// Windows ホストの bind mount はファイル I/O が遅いため、ビルド成果物は名前付きボリュームに置く
+	"mounts": [
+		"source=atcoder-rust-target,target=/workspaces/atcoder_rust/target,type=volume"
+	],
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -21,14 +25,22 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				// "rust-lang.rust",
+				// Rust の補完（rust-analyzer）とデバッガ（CodeLLDB）は、ベースイメージの Rust の feature が入れる
+				// （以前の拡張機能 rust-lang.rust は非推奨になり、rust-analyzer に置き換わった）
 				"EditorConfig.EditorConfig",
-				"forbeslindesay.forbeslindesay-taskrunner",
-				"GitHub.copilot",
-				"tamasfe.even-better-toml",
+				// タスク（.vscode/tasks.json）をステータスバーのボタンからクリックで実行する
+				"actboy168.tasks",
+				// TOML（Cargo.toml・compete.toml）の補完とチェック。保守が止まった Even Better TOML の代わりに使う
+				// （Even Better TOML はベースイメージの Rust の feature が入れるので、- を付けて入れないようにする）
+				"tombi-toml.tombi",
+				"-tamasfe.even-better-toml",
+				// Python（ランダムテストの gen.py・naive.py）。補完の Pylance とデバッガの debugpy も一緒に入る
 				"ms-python.python",
-				"visualstudioexptteam.vscodein",
-				"ms-vscode.cpptools"
+				// Python のチェックと自動フォーマット
+				"charliermarsh.ruff",
+				// C/C++ 拡張機能は入れない（デバッガは launch.json の CodeLLDB を使う）
+				"lorenzopirro.rust-flash-snippets"
+				// Rust Syntax 拡張機能は入れない（文法は VS Code 本体に取り込まれていて、色分けは rust-analyzer のほうが正確）
 			]
 		}
 	}

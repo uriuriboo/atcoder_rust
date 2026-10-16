@@ -1,2 +1,6 @@
 [build]
 target-dir = "target"
+
+# リンクを速くするため mold を使う（apt の mold パッケージが必要）
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "link-arg=-fuse-ld=mold"]

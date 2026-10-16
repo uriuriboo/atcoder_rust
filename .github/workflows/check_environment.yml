@@ -3,6 +3,12 @@ name: Check Environment
 on:
   push:
     branches: '**'
+    # ドキュメントだけの変更では環境に影響しないため動かさない（ほかのファイルも変わっていれば動く）
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'img/**'
+      - 'LICENCE'
 
 jobs:
   run_post_create_command:
@@ -10,21 +16,28 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Set up Rust
-      uses: actions-rust-lang/setup-rust-toolchain@v1
+      uses: actions-rust-lang/setup-rust-toolchain@v2
       with:
-        rust-version: stable  # 使用する Rust のバージョンを指定
+        toolchain: stable  # 使用する Rust のバージョンを指定
+        # デフォルトの rustup override は rust-toolchain.toml より優先され、以降の cargo が 1.89.0 にならないため無効にする
+        override: false
 
     - name: Run postCreateCommand.bash
       run: |
         bash .devcontainer/postCreateCommand.bash
-        rustup install 1.70.0-x86_64-unknown-linux-gnu
+    - name: check python for stress test
+      run: python3.15 --version
+    # oj は依存（setuptools など）が欠けていてもインストールは成功するので、起動できるかを確かめる
+    - name: check online-judge-tools for stress test
+      run: oj --version
     - name: check cargo-compete
       continue-on-error: true
       run: |
         cargo compete new abc325
+        sed -i 's/^edition = "2021"$/edition = "2024"/' abc325/Cargo.toml
         cargo member include abc325
         pwd
         cat .github/ciabc325a.rs > abc325/src/bin/a.rs

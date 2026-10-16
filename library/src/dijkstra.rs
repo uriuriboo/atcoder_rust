@@ -2,7 +2,7 @@
 use proconio::{marker::*, *};
 #[allow(unused_imports)]
 use std::{cmp::*, collections::*, *};
-const INF: usize = std::usize::MAX / 2;
+const INF: usize = usize::MAX / 2;
 #[fastout]
 fn main(){
     input!{
